@@ -24,6 +24,7 @@ namespace ElectronicObserver.Window {
 
 
 		private List<ShipStatusHP> HPBars;
+        private List<Label> DamageLabels;
 
 		public Font MainFont { get; set; }
 		public Font SubFont { get; set; }
@@ -33,6 +34,12 @@ namespace ElectronicObserver.Window {
 		public FormBattle( FormMain parent ) {
 			InitializeComponent();
 
+            this.TableBottom.SuspendLayout();
+            this.TableBottom.ColumnCount = 4;
+            this.TableBottom.Size = new System.Drawing.Size(340, 168);
+            this.TableBottom.ResumeLayout(false);
+            this.TableBottom.PerformLayout();
+
 			ControlHelper.SetDoubleBuffered( TableTop );
 			ControlHelper.SetDoubleBuffered( TableBottom );
 
@@ -40,28 +47,46 @@ namespace ElectronicObserver.Window {
 			ConfigurationChanged();
 
 			HPBars = new List<ShipStatusHP>( 18 );
+            DamageLabels = new List<Label>(6);
 
 
 			TableBottom.SuspendLayout();
-			for ( int i = 0; i < 18; i++ ) {
-				HPBars.Add( new ShipStatusHP() );
-				HPBars[i].Size = new Size( 80, 20 );
-				HPBars[i].Margin = new Padding( 2, 0, 2, 0 );
-				HPBars[i].Anchor = AnchorStyles.None;
-				HPBars[i].MainFont = MainFont;
-				HPBars[i].SubFont = SubFont;
-				HPBars[i].UsePrevValue = true;
-				HPBars[i].ShowDifference = true;
-				HPBars[i].MaximumDigit = 9999;
+            for (int i = 0; i < 6; i++)
+            {
+                var lbl = new Label();
+                DamageLabels.Add(lbl);
+                lbl.Size = new Size(36, 20);
+                lbl.Margin = new Padding(2, 0, 2, 0);
+                lbl.Anchor = AnchorStyles.None;
+                lbl.Font = MainFont;
+                TableBottom.Controls.Add(lbl, 3, i + 1);
+            }
 
-				if ( i < 6 ) {
-					TableBottom.Controls.Add( HPBars[i], 0, i + 1 );
-				} else if ( i < 12 ) {
-					TableBottom.Controls.Add( HPBars[i], 2, i - 5 );
-				} else {
-					TableBottom.Controls.Add( HPBars[i], 1, i - 11 );
-				}
-			}
+            for (int i = 0; i < 18; i++)
+            {
+                HPBars.Add(new ShipStatusHP());
+                HPBars[i].Size = new Size(80, 20);
+                HPBars[i].Margin = new Padding(2, 0, 2, 0);
+                HPBars[i].Anchor = AnchorStyles.None;
+                HPBars[i].MainFont = MainFont;
+                HPBars[i].SubFont = SubFont;
+                HPBars[i].UsePrevValue = true;
+                HPBars[i].ShowDifference = true;
+                HPBars[i].MaximumDigit = 9999;
+
+                if (i < 6)
+                {
+                    TableBottom.Controls.Add(HPBars[i], 0, i + 1);
+                }
+                else if (i < 12)
+                {
+                    TableBottom.Controls.Add(HPBars[i], 2, i - 5);
+                }
+                else
+                {
+                    TableBottom.Controls.Add(HPBars[i], 1, i - 11);
+                }
+            }
 			TableBottom.ResumeLayout();
 
 
@@ -130,6 +155,15 @@ namespace ElectronicObserver.Window {
 				case "api_req_sortie/battle":
 				case "api_req_practice/battle": {
 						int[] hp = bm.BattleDay.EmulateBattle();
+                        double[] damages;
+                        if (bm.BattleDay is BattleNormalDay)
+                        {
+                            damages = ((BattleNormalDay)bm.BattleDay).friendDamages;
+                        }
+                        else
+                        {
+                            damages = new double[6];
+                        }
 
 						SetFormation( bm.BattleDay );
 						SetSearchingResult( bm.BattleDay );
@@ -137,7 +171,20 @@ namespace ElectronicObserver.Window {
 						SetHPNormal( hp, bm.BattleDay );
 						SetDamageRateNormal( hp, bm.BattleDay );
 
-						BaseLayoutPanel.Visible = true;
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (damages[i] > 0)
+                            {
+                                DamageLabels[i].Text = damages[i].ToString();
+                                DamageLabels[i].Visible = true;
+                            }
+                            else
+                            {
+                                DamageLabels[i].Visible = false;
+                            }
+                        }
+
+                        BaseLayoutPanel.Visible = true;
 					} break;
 
 				case "api_req_battle_midnight/battle":

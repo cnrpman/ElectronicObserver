@@ -19,6 +19,7 @@ namespace ElectronicObserver.Window.Dialog {
 		public DialogConfiguration() {
 			InitializeComponent();
 
+            CustomInitialize();
 		}
 
 		public DialogConfiguration( Configuration.ConfigurationData config )
@@ -55,6 +56,7 @@ namespace ElectronicObserver.Window.Dialog {
 			Connection_SaveReceivedData_CheckedChanged( null, new EventArgs() );
 			Connection_SaveDataPath_TextChanged( null, new EventArgs() );
 			Debug_EnableDebugMenu_CheckedChanged( null, new EventArgs() );
+            textCacheFolder_TextChanged(null, EventArgs.Empty);
 
 		}
 
@@ -310,6 +312,9 @@ namespace ElectronicObserver.Window.Dialog {
 			FormBrowser_ConfirmAtRefresh.Checked = config.FormBrowser.ConfirmAtRefresh;
 			FormBrowser_AppliesStyleSheet.Checked = config.FormBrowser.AppliesStyleSheet;
 
+            // [缓存]
+            textCacheFolder.Text = config.CacheSettings.CacheFolder;
+
 			//finalize
 			UpdateParameter();
 		}
@@ -399,7 +404,100 @@ namespace ElectronicObserver.Window.Dialog {
 			config.FormBrowser.ConfirmAtRefresh = FormBrowser_ConfirmAtRefresh.Checked;
 			config.FormBrowser.AppliesStyleSheet = FormBrowser_AppliesStyleSheet.Checked;
 
+            // [缓存]
+            config.CacheSettings.CacheFolder = textCacheFolder.Text;
+
 		}
 
-	}
+        private void buttonCacheFolderBrowse_Click(object sender, EventArgs e)
+        {
+            textCacheFolder.Text = PathHelper.ProcessFolderBrowserDialog(textCacheFolder.Text, FolderBrowser);
+        }
+
+        private void textCacheFolder_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(textCacheFolder.Text))
+            {
+                textCacheFolder.BackColor = SystemColors.Window;
+                ToolTipInfo.SetToolTip(textCacheFolder, null);
+            }
+            else
+            {
+                textCacheFolder.BackColor = Color.MistyRose;
+                ToolTipInfo.SetToolTip(textCacheFolder, "指定的文件夹不存在。");
+            }
+        }
+
+
+
+        #region - Added config pages -
+
+        private void CustomInitialize()
+        {
+            this.tabPageCache = new System.Windows.Forms.TabPage();
+            this.labelCache = new System.Windows.Forms.Label();
+            this.textCacheFolder = new System.Windows.Forms.TextBox();
+            this.buttonCacheFolderBrowse = new System.Windows.Forms.Button();
+
+            this.tabControl1.SuspendLayout();
+            this.tabPageCache.SuspendLayout();
+            this.tabControl1.Controls.Add(this.tabPageCache);
+            // 
+            // tabPageCache
+            // 
+            this.tabPageCache.Controls.Add(this.buttonCacheFolderBrowse);
+            this.tabPageCache.Controls.Add(this.textCacheFolder);
+            this.tabPageCache.Controls.Add(this.labelCache);
+            this.tabPageCache.Location = new System.Drawing.Point(4, 44);
+            this.tabPageCache.Name = "tabPageCache";
+            this.tabPageCache.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCache.Size = new System.Drawing.Size(392, 211);
+            this.tabPageCache.TabIndex = 8;
+            this.tabPageCache.Text = "缓存";
+            this.tabPageCache.UseVisualStyleBackColor = true;
+            // 
+            // labelCache
+            // 
+            this.labelCache.AutoSize = true;
+            this.labelCache.Location = new System.Drawing.Point(8, 9);
+            this.labelCache.Name = "labelCache";
+            this.labelCache.Size = new System.Drawing.Size(103, 15);
+            this.labelCache.TabIndex = 0;
+            this.labelCache.Text = "缓存文件夹路径：";
+            // 
+            // textCacheFolder
+            // 
+            this.textCacheFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textCacheFolder.Location = new System.Drawing.Point(118, 6);
+            this.textCacheFolder.Name = "textCacheFolder";
+            this.textCacheFolder.Size = new System.Drawing.Size(199, 23);
+            this.textCacheFolder.TabIndex = 1;
+            this.textCacheFolder.TextChanged += new System.EventHandler(this.textCacheFolder_TextChanged);
+            // 
+            // buttonCacheFolderBrowse
+            // 
+            this.buttonCacheFolderBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCacheFolderBrowse.Location = new System.Drawing.Point(323, 6);
+            this.buttonCacheFolderBrowse.Name = "buttonCacheFolderBrowse";
+            this.buttonCacheFolderBrowse.Size = new System.Drawing.Size(61, 23);
+            this.buttonCacheFolderBrowse.TabIndex = 2;
+            this.buttonCacheFolderBrowse.Text = "浏览";
+            this.buttonCacheFolderBrowse.UseVisualStyleBackColor = true;
+            this.buttonCacheFolderBrowse.Click += new System.EventHandler(this.buttonCacheFolderBrowse_Click);
+            //
+            // End
+            //
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageCache.ResumeLayout(false);
+        }
+
+        // custom config
+        private System.Windows.Forms.TabPage tabPageCache;
+        private System.Windows.Forms.Label labelCache;
+        private System.Windows.Forms.TextBox textCacheFolder;
+        private System.Windows.Forms.Button buttonCacheFolderBrowse;
+    }
+
+        #endregion
 }

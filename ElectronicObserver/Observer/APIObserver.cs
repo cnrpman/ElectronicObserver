@@ -1,4 +1,5 @@
 ﻿using Codeplex.Data;
+using ElectronicObserver.Observer.Cache;
 using ElectronicObserver.Observer.kcsapi;
 using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Mathematics;
@@ -27,6 +28,7 @@ namespace ElectronicObserver.Observer {
 
 		#endregion
 
+        private CacheCore cache = new CacheCore();
 
 		public APIDictionary APIList;
 
@@ -98,6 +100,7 @@ namespace ElectronicObserver.Observer {
 			ServerAddress = null;
 
 			Fiddler.FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
+            Fiddler.FiddlerApplication.BeforeResponse += FiddlerApplication_BeforeResponse;
 			Fiddler.FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
 
 		}
@@ -243,7 +246,28 @@ namespace ElectronicObserver.Observer {
 				string body = oSession.GetResponseBodyAsString();
 				UIControl.BeginInvoke( (Action)( () => { LoadResponse( url, body ); } ) );
 
-			}
+            }
+            else if (oSession.responseCode == 200)
+            {
+                string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
+                if (!string.IsNullOrEmpty(filepath))
+                {
+                    if (File.Exists(filepath))
+                        File.Delete(filepath);
+
+                    //保存下载文件并记录Modified-Time
+                    try
+                    {
+                        oSession.SaveResponseBody(filepath);
+                        _SaveModifiedTime(filepath, oSession.oResponse.headers["Last-Modified"]);
+                        //Debug.WriteLine("CACHR> 【下载文件】" + oSession.PathAndQuery);
+                    }
+                    catch (Exception ex)
+                    {
+                        Utility.Logger.Add(9, "会话结束时，保存返回文件时发生异常 " + ex.ToString());
+                    }
+                }
+            }
 
 
 
@@ -262,6 +286,29 @@ namespace ElectronicObserver.Observer {
 		}
 
 
+        private void FiddlerApplication_BeforeResponse(Fiddler.Session oSession)
+        {
+            if (oSession.PathAndQuery.StartsWith("/kcs/") && oSession.responseCode == 304)
+            {
+                string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
+                //只有TaskRecord中有记录的文件才是验证的文件，才需要修改Header
+                if (!string.IsNullOrEmpty(filepath))
+                {
+                    //服务器返回304，文件没有修改 -> 返回本地文件
+                    oSession.bBufferResponse = true;
+                    oSession.ResponseBody = File.ReadAllBytes(filepath);
+                    oSession.oResponse.headers.HTTPResponseCode = 200;
+                    oSession.oResponse.headers.HTTPResponseStatus = "200 OK";
+                    oSession.oResponse.headers["Last-Modified"] = oSession.oRequest.headers["If-Modified-Since"];
+                    oSession.oResponse.headers["Accept-Ranges"] = "bytes";
+                    oSession.oResponse.headers.Remove("If-Modified-Since");
+                    oSession.oRequest.headers.Remove("If-Modified-Since");
+                    if (filepath.EndsWith(".swf"))
+                        oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
+                }
+            }
+        }
+
 
 		private void FiddlerApplication_BeforeRequest( Fiddler.Session oSession ) {
 
@@ -274,7 +321,50 @@ namespace ElectronicObserver.Observer {
 			}
 
 
-			if ( oSession.fullUrl.Contains( "/kcsapi/" ) ) {
+            if (oSession.fullUrl.Contains("/kcs/"))
+            {
+
+                // = KanColleCacher =
+                string filepath;
+                var direction = cache.GotNewRequest(oSession.fullUrl, out filepath);
+
+                if (direction == Direction.Return_LocalFile)
+                {
+                    //返回本地文件
+                    oSession.utilCreateResponseAndBypassServer();
+                    oSession.ResponseBody = File.ReadAllBytes(filepath);
+                    oSession.oResponse.headers["Server"] = "Apache";
+                    oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
+                    oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString(DateTime.Now);
+                    oSession.oResponse.headers["Connection"] = "close";
+                    oSession.oResponse.headers["Accept-Ranges"] = "bytes";
+                    filepath.ToLower();
+                    if (filepath.EndsWith(".swf"))
+                        oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
+                    else if (filepath.EndsWith(".mp3"))
+                        oSession.oResponse.headers["Content-Type"] = "audio/mpeg";
+                    else if (filepath.EndsWith(".png"))
+                        oSession.oResponse.headers["Content-Type"] = "image/png";
+
+                    //Debug.WriteLine("CACHR> 【返回本地】" + result);
+                }
+                else if (direction == Direction.Verify_LocalFile)
+                {
+                    //请求服务器验证文件
+                    oSession.oRequest.headers["If-Modified-Since"] = _GetModifiedTime(filepath);
+                    oSession.bBufferResponse = true;
+
+                    //Debug.WriteLine("CACHR> 【验证文件】" + oSession.PathAndQuery);
+                }
+                else
+                {
+                    //下载文件
+                    Utility.Logger.Add(2, string.Format("BeforeRequest: 重新下载文件。{0}", oSession.fullUrl));
+                }
+
+            }
+            else if (oSession.fullUrl.Contains("/kcsapi/"))
+            {
 
 				string url = oSession.fullUrl;
 				string body = oSession.GetRequestBodyAsString();
@@ -291,9 +381,124 @@ namespace ElectronicObserver.Observer {
 
 				UIControl.BeginInvoke( (Action)( () => { LoadRequest( url, body ); } ) );
 			}
+            else if (oSession.PathAndQuery.StartsWith("/gadget/js/kcs_flash.js"))
+            {
+                try
+                {
+                    System.Net.ServicePointManager.Expect100Continue = false;
+                    var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(oSession.fullUrl);
+                    request.Method = "GET";
+                    foreach (var header in oSession.oRequest.headers)
+                    {
+                        switch (header.Name.ToLower())
+                        {
+                            case "accept":
+                                request.Accept = header.Value;
+                                break;
+                            case "referer":
+                                request.Referer = header.Value;
+                                break;
+                            case "accept-language":
+                            case "accept-encoding":
+                                request.Headers[header.Name] = header.Value;
+                                break;
+                            case "user-agent":
+                                request.UserAgent = header.Value;
+                                break;
+                            case "connection":
+                                request.KeepAlive = (header.Value == "Keep-Alive");
+                                break;
+                        }
+                    }
+                    if (string.IsNullOrEmpty(request.Referer))
+                    {
+                        throw new Exception("Unknow request: " + oSession.oRequest.headers.ToString());
+                    }
+
+                    using (var response = request.GetResponse())
+                    {
+                        Stream stream = response.GetResponseStream();
+                        switch (response.Headers["Content-Encoding"])
+                        {
+                            case "gzip":
+                                stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
+                                break;
+                            case "deflate":
+                                stream = new System.IO.Compression.DeflateStream(stream, System.IO.Compression.CompressionMode.Decompress);
+                                break;
+                        }
+
+                        byte[] bs = null;
+                        using (stream)
+                        using (var ms = new System.IO.MemoryStream())
+                        {
+                            byte[] buffer = new byte[2048];
+                            int count;
+                            while ((count = stream.Read(buffer, 0, 2048)) > 0)
+                            {
+                                ms.Write(buffer, 0, count);
+                            }
+                            ms.Flush();
+                            bs = ms.ToArray();
+                        }
+
+                        if (bs == null)
+                        {
+                            throw new Exception("Unknow response data: " + response.Headers.ToString());
+                        }
+
+                        oSession.utilCreateResponseAndBypassServer();
+                        string body = Encoding.UTF8.GetString(bs)
+                            .Replace("\"opaque\"", "\"direct\"")
+                            ;//.Replace("\"high\"", "\"low\"");
+                        oSession.ResponseBody = Encoding.UTF8.GetBytes(body);
+                        foreach (var header in response.Headers.AllKeys)
+                        {
+                            oSession.oResponse.headers[header] = response.Headers[header];
+                        }
+
+                    }
+
+                    Utility.Logger.Add(2, "set wmode to 'direct'.");
+                }
+                catch (Exception ex)
+                {
+                    // cannot download js
+                    Utility.ErrorReporter.SendErrorReport(ex, "cannot download js");
+                }
+            }
 
 		}
 
+
+        private string _GetModifiedTime(string filepath)
+        {
+            FileInfo fi;
+            try
+            {
+                fi = new FileInfo(filepath);
+                return GMTHelper.ToGMTString(fi.LastWriteTime);
+            }
+            catch (Exception ex)
+            {
+                Utility.Logger.Add(9, "在读取文件修改时间时发生异常。" + ex.ToString());
+                return "";
+            }
+        }
+
+        private void _SaveModifiedTime(string filepath, string gmTime)
+        {
+            FileInfo fi;
+            try
+            {
+                fi = new FileInfo(filepath);
+                fi.LastWriteTime = GMTHelper.GMT2Local(gmTime);
+            }
+            catch (Exception ex)
+            {
+                Utility.Logger.Add(9, "在保存文件修改时间时发生异常。" + ex.ToString());
+            }
+        }
 
 
 		public void LoadRequest( string path, string data ) {

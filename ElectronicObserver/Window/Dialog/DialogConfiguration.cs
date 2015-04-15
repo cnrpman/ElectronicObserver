@@ -414,6 +414,7 @@ namespace ElectronicObserver.Window.Dialog {
 
             // [缓存]
             config.CacheSettings.CacheFolder = textCacheFolder.Text;
+            Utility.Logger.Add(2, string.Format("CacheCore: 缓存设置更新。“{0}”", textCacheFolder.Text));
 
 		}
 

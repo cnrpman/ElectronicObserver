@@ -259,6 +259,7 @@ namespace ElectronicObserver.Observer {
                     //保存下载文件并记录Modified-Time
                     try
                     {
+                        Utility.Logger.Add(2, string.Format("更新缓存文件：{0}.", filepath));
                         oSession.SaveResponseBody(filepath);
                         _SaveModifiedTime(filepath, oSession.oResponse.headers["Last-Modified"]);
                         //Debug.WriteLine("CACHR> 【下载文件】" + oSession.PathAndQuery);
@@ -328,7 +329,6 @@ namespace ElectronicObserver.Observer {
                 // = KanColleCacher =
                 string filepath;
                 var direction = cache.GotNewRequest(oSession.fullUrl, out filepath);
-
                 if (direction == Direction.Return_LocalFile)
                 {
                     //返回本地文件

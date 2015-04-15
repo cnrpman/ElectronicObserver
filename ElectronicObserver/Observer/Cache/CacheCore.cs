@@ -55,7 +55,6 @@ namespace ElectronicObserver.Observer.Cache
         public CacheCore()
         {
             set = ElectronicObserver.Utility.Configuration.Config.CacheSettings;
-            //Utility.Logger.Add(2, string.Format("CacheCore: 缓存设置载入。“{0}”", myCacheFolder));
         }
 
 

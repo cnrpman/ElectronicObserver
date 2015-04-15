@@ -51,12 +51,10 @@ namespace ElectronicObserver.Observer.Cache
     {
         #region 初始化与析构
         ConfigCacheSettings set;
-        string myCacheFolder;
 
         public CacheCore()
         {
             set = ElectronicObserver.Utility.Configuration.Config.CacheSettings;
-            myCacheFolder = set.CacheFolder;
             //Utility.Logger.Add(2, string.Format("CacheCore: 缓存设置载入。“{0}”", myCacheFolder));
         }
 
@@ -106,7 +104,7 @@ namespace ElectronicObserver.Observer.Cache
                 {
                     filepath = uri.AbsolutePath.Replace('/', '\\');
                     filepath = filepath.Remove(filepath.LastIndexOf('\\')) + ".mp3";
-                    filepath = myCacheFolder + filepath;
+                    filepath = set.CacheFolder + filepath;
                     result = filepath;
 
                     if (File.Exists(filepath))
@@ -114,7 +112,7 @@ namespace ElectronicObserver.Observer.Cache
                 }
                 else if (type == filetype.world_name)
                 {
-                    filepath = myCacheFolder + @"\kcs\resources\image\world.png";
+                    filepath = set.CacheFolder + @"\kcs\resources\image\world.png";
                     result = filepath;
 
                     if (File.Exists(filepath))
@@ -132,7 +130,7 @@ namespace ElectronicObserver.Observer.Cache
                   type == filetype.world_name ||
                   type == filetype.image) && set.CacheResourceFiles > 0))
             {
-                filepath = myCacheFolder + uri.AbsolutePath.Replace('/', '\\');
+                filepath = set.CacheFolder + uri.AbsolutePath.Replace('/', '\\');
 
                 //检查Hack文件地址
                 if (set.HackEnabled)

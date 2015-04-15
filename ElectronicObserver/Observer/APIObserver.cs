@@ -265,7 +265,7 @@ namespace ElectronicObserver.Observer {
                     }
                     catch (Exception ex)
                     {
-                        Utility.Logger.Add(9, "会话结束时，保存返回文件时发生异常 " + ex.ToString());
+                        Utility.ErrorReporter.SendErrorReport(ex, "会话结束时，保存返回文件时发生异常：" + oSession.fullUrl);
                     }
                 }
             }
@@ -423,7 +423,6 @@ namespace ElectronicObserver.Observer {
             }
             catch (Exception ex)
             {
-                //Utility.Logger.Add(9, "在读取文件修改时间时发生异常。" + ex.ToString());
                 Utility.ErrorReporter.SendErrorReport(ex, "在读取文件修改时间时发生异常：" + dt);
                 return "";
             }
@@ -435,11 +434,14 @@ namespace ElectronicObserver.Observer {
             try
             {
                 fi = new FileInfo(filepath);
-                fi.LastWriteTime = GMTHelper.GMT2Local(gmTime);
+                DateTime dt = GMTHelper.GMT2Local(gmTime);
+                if (dt.Year > 1900)
+                {
+                    fi.LastWriteTime = dt;
+                }
             }
             catch (Exception ex)
             {
-                //Utility.Logger.Add(9, "在保存文件修改时间时发生异常。" + ex.ToString());
                 Utility.ErrorReporter.SendErrorReport(ex, string.Format("在保存文件修改时间时发生异常。filepath: {0}, gmTime: {1}", filepath, gmTime));
             }
         }

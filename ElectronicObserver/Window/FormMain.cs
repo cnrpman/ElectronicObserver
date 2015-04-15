@@ -6,6 +6,7 @@ using ElectronicObserver.Resource;
 using ElectronicObserver.Resource.Record;
 using ElectronicObserver.Utility;
 using ElectronicObserver.Window.Dialog;
+using ElectronicObserver.Window.Integrate;
 using ElectronicObserver.Window.Support;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace ElectronicObserver.Window {
 	public partial class FormMain : Form {
 
 		#region Properties
+
+		public DockPanel MainPanel { get { return MainDockPanel; } }
+		public FormWindowCapture WindowCapture { get { return fWindowCapture; } }
+
 		#endregion
 
 
@@ -43,6 +48,7 @@ namespace ElectronicObserver.Window {
 		public FormFleetOverview fFleetOverview;
 		public FormShipGroup fShipGroup;
 		public FormBrowserHost fBrowser;
+		public FormWindowCapture fWindowCapture;
 
 		#endregion
 
@@ -109,7 +115,8 @@ namespace ElectronicObserver.Window {
 			SubForms.Add( fFleetOverview = new FormFleetOverview( this ) );
 			SubForms.Add( fShipGroup = new FormShipGroup( this ) );
 			SubForms.Add( fBrowser = new FormBrowserHost( this ) );
-
+			SubForms.Add( fWindowCapture = new FormWindowCapture( this ) );
+			
 			LoadLayout( Configuration.Config.Life.LayoutFilePath );
 
 			ConfigurationChanged();		//設定から初期化
@@ -270,7 +277,12 @@ namespace ElectronicObserver.Window {
 					return fShipGroup;
 				case "Browser":
 					return fBrowser;
+				case "WindowCapture":
+					return fWindowCapture;
 				default:
+					if ( persistString.StartsWith( FormIntegrate.PREFIX ) ) {
+						return FormIntegrate.FromPersistString( this, persistString );
+					}
 					return null;
 			}
 		}
@@ -282,6 +294,9 @@ namespace ElectronicObserver.Window {
 			try {
 
 				if ( stream != null ) {
+
+					// 取り込んだウィンドウは一旦デタッチして閉じる
+					fWindowCapture.CloseAll();
 
 					foreach ( var f in SubForms ) {
 						f.Show( MainDockPanel, DockState.Document );
@@ -305,6 +320,8 @@ namespace ElectronicObserver.Window {
 					if ( MainDockPanel.Contents.Count > 0 )
 						MainDockPanel.Contents.First().DockHandler.Activate();
 					//*/
+
+					fWindowCapture.AttachAll();
 
 				} else {
 
@@ -944,6 +961,14 @@ namespace ElectronicObserver.Window {
 			StripMenu_Browser_AppliesStyleSheet.Checked = Utility.Configuration.Config.FormBrowser.AppliesStyleSheet;
 		}
 
+		private void StripMenu_WindowCapture_AttachAll_Click( object sender, EventArgs e ) {
+			fWindowCapture.AttachAll();
+		}
+
+		private void StripMenu_WindowCapture_DetachAll_Click( object sender, EventArgs e ) {
+			fWindowCapture.DetachAll();
+		}
+		
 
 		#region フォーム表示
 
@@ -1007,9 +1032,12 @@ namespace ElectronicObserver.Window {
 			fBrowser.Show( MainDockPanel );
 		}
 
+		private void StripMenu_WindowCapture_SubWindow_Click( object sender, EventArgs e ) {
+			fWindowCapture.Show( MainDockPanel );
+		}
+
 		#endregion
 
 
 
-	}
-}
+	}}

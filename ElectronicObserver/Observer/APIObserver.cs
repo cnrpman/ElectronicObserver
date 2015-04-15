@@ -339,7 +339,7 @@ namespace ElectronicObserver.Observer {
                     oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString(DateTime.Now);
                     oSession.oResponse.headers["Connection"] = "close";
                     oSession.oResponse.headers["Accept-Ranges"] = "bytes";
-                    filepath.ToLower();
+                    filepath = filepath.ToLower();
                     if (filepath.EndsWith(".swf"))
                         oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
                     else if (filepath.EndsWith(".mp3"))
@@ -386,86 +386,25 @@ namespace ElectronicObserver.Observer {
             {
                 try
                 {
-                    System.Net.ServicePointManager.Expect100Continue = false;
-                    var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(oSession.fullUrl);
-                    request.Method = "GET";
-                    foreach (var header in oSession.oRequest.headers)
+                    string file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.js";
+                    if (File.Exists(file))
                     {
-                        switch (header.Name.ToLower())
-                        {
-                            case "accept":
-                                request.Accept = header.Value;
-                                break;
-                            case "referer":
-                                request.Referer = header.Value;
-                                break;
-                            case "accept-language":
-                            case "accept-encoding":
-                                request.Headers[header.Name] = header.Value;
-                                break;
-                            case "user-agent":
-                                request.UserAgent = header.Value;
-                                break;
-                            case "connection":
-                                request.KeepAlive = (header.Value == "Keep-Alive");
-                                break;
-                        }
-                    }
-                    if (string.IsNullOrEmpty(request.Referer))
-                    {
-                        throw new Exception("Unknow request: " + oSession.oRequest.headers.ToString());
-                    }
-
-                    using (var response = request.GetResponse())
-                    {
-                        Stream stream = response.GetResponseStream();
-                        switch (response.Headers["Content-Encoding"])
-                        {
-                            case "gzip":
-                                stream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Decompress);
-                                break;
-                            case "deflate":
-                                stream = new System.IO.Compression.DeflateStream(stream, System.IO.Compression.CompressionMode.Decompress);
-                                break;
-                        }
-
-                        byte[] bs = null;
-                        using (stream)
-                        using (var ms = new System.IO.MemoryStream())
-                        {
-                            byte[] buffer = new byte[2048];
-                            int count;
-                            while ((count = stream.Read(buffer, 0, 2048)) > 0)
-                            {
-                                ms.Write(buffer, 0, count);
-                            }
-                            ms.Flush();
-                            bs = ms.ToArray();
-                        }
-
-                        if (bs == null)
-                        {
-                            throw new Exception("Unknow response data: " + response.Headers.ToString());
-                        }
-
                         oSession.utilCreateResponseAndBypassServer();
-                        string body = Encoding.UTF8.GetString(bs)
-                            .Replace("\"opaque\"", "\"direct\"")
-                            ;//.Replace("\"high\"", "\"low\"");
-                        oSession.ResponseBody = Encoding.UTF8.GetBytes(body);
-                        foreach (var header in response.Headers.AllKeys)
-                        {
-                            oSession.oResponse.headers[header] = response.Headers[header];
-                        }
+                        oSession.ResponseBody = File.ReadAllBytes(file);
+                        oSession.oResponse.headers["Server"] = "Apache";
+                        oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
+                        oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString(DateTime.Now);
+                        oSession.oResponse.headers["Connection"] = "close";
+                        oSession.oResponse.headers["Accept-Ranges"] = "bytes";
+                        oSession.oResponse.headers["Content-Type"] = "application/x-javascript";
 
+                        Utility.Logger.Add(2, "apply custom kcs_flash.js.");
                     }
-
-                    Utility.Logger.Add(2, "set wmode to 'direct'.");
                 }
                 catch (Exception ex)
                 {
-                    // cannot download js
-                    Utility.ErrorReporter.SendErrorReport(ex, "cannot download js");
+                    // read error
+                    Utility.ErrorReporter.SendErrorReport(ex, "error to read kcs_flash.js.");
                 }
             }
 

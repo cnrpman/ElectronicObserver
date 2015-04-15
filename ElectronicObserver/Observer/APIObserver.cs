@@ -414,14 +414,17 @@ namespace ElectronicObserver.Observer {
         private string _GetModifiedTime(string filepath)
         {
             FileInfo fi;
+            DateTime dt = default(DateTime);
             try
             {
                 fi = new FileInfo(filepath);
-                return GMTHelper.ToGMTString(fi.LastWriteTime);
+                dt = fi.LastWriteTime;
+                return GMTHelper.ToGMTString(dt);
             }
             catch (Exception ex)
             {
-                Utility.Logger.Add(9, "在读取文件修改时间时发生异常。" + ex.ToString());
+                //Utility.Logger.Add(9, "在读取文件修改时间时发生异常。" + ex.ToString());
+                Utility.ErrorReporter.SendErrorReport(ex, "在读取文件修改时间时发生异常：" + dt);
                 return "";
             }
         }
@@ -436,7 +439,8 @@ namespace ElectronicObserver.Observer {
             }
             catch (Exception ex)
             {
-                Utility.Logger.Add(9, "在保存文件修改时间时发生异常。" + ex.ToString());
+                //Utility.Logger.Add(9, "在保存文件修改时间时发生异常。" + ex.ToString());
+                Utility.ErrorReporter.SendErrorReport(ex, string.Format("在保存文件修改时间时发生异常。filepath: {0}, gmTime: {1}", filepath, gmTime));
             }
         }
 

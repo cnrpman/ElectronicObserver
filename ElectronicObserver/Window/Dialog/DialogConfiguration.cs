@@ -318,6 +318,7 @@ namespace ElectronicObserver.Window.Dialog {
 
             // [缓存]
             textCacheFolder.Text = config.CacheSettings.CacheFolder;
+            checkCache.Checked = config.CacheSettings.CacheEnabled;
 
 			//finalize
 			UpdateParameter();
@@ -414,7 +415,16 @@ namespace ElectronicObserver.Window.Dialog {
 
             // [缓存]
             config.CacheSettings.CacheFolder = textCacheFolder.Text;
-            Utility.Logger.Add(2, string.Format("CacheCore: 缓存设置更新。“{0}”", textCacheFolder.Text));
+            if (checkCache.Checked)
+            {
+                config.CacheSettings.CacheEnabled = true;
+                Utility.Logger.Add(2, string.Format("缓存设置更新。“{0}”", textCacheFolder.Text));
+            }
+            else
+            {
+                config.CacheSettings.CacheEnabled = false;
+                Utility.Logger.Add(2, string.Format("缓存已关闭。"));
+            }
 
 		}
 
@@ -447,6 +457,7 @@ namespace ElectronicObserver.Window.Dialog {
             this.labelCache = new System.Windows.Forms.Label();
             this.textCacheFolder = new System.Windows.Forms.TextBox();
             this.buttonCacheFolderBrowse = new System.Windows.Forms.Button();
+            this.checkCache = new System.Windows.Forms.CheckBox();
 
             this.tabControl1.SuspendLayout();
             this.tabPageCache.SuspendLayout();
@@ -457,6 +468,7 @@ namespace ElectronicObserver.Window.Dialog {
             this.tabPageCache.Controls.Add(this.buttonCacheFolderBrowse);
             this.tabPageCache.Controls.Add(this.textCacheFolder);
             this.tabPageCache.Controls.Add(this.labelCache);
+            this.tabPageCache.Controls.Add(this.checkCache);
             this.tabPageCache.Location = new System.Drawing.Point(4, 44);
             this.tabPageCache.Name = "tabPageCache";
             this.tabPageCache.Padding = new System.Windows.Forms.Padding(3);
@@ -494,6 +506,16 @@ namespace ElectronicObserver.Window.Dialog {
             this.buttonCacheFolderBrowse.Text = "浏览";
             this.buttonCacheFolderBrowse.UseVisualStyleBackColor = true;
             this.buttonCacheFolderBrowse.Click += new System.EventHandler(this.buttonCacheFolderBrowse_Click);
+            // 
+            // checkCache
+            // 
+            this.checkCache.AutoSize = true;
+            this.checkCache.Location = new System.Drawing.Point(8, 38);
+            this.checkCache.Name = "checkCache";
+            this.checkCache.Size = new System.Drawing.Size(139, 19);
+            this.checkCache.TabIndex = 3;
+            this.checkCache.Text = "启用缓存";
+            this.checkCache.UseVisualStyleBackColor = true;
             //
             // End
             //
@@ -506,6 +528,7 @@ namespace ElectronicObserver.Window.Dialog {
         private System.Windows.Forms.Label labelCache;
         private System.Windows.Forms.TextBox textCacheFolder;
         private System.Windows.Forms.Button buttonCacheFolderBrowse;
+        private System.Windows.Forms.CheckBox checkCache;
     }
 
         #endregion

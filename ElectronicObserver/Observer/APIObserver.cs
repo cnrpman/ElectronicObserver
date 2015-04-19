@@ -247,26 +247,20 @@ namespace ElectronicObserver.Observer {
 				string body = oSession.GetResponseBodyAsString();
 				UIControl.BeginInvoke( (Action)( () => { LoadResponse( url, body ); } ) );
 
-            }
-            else if (oSession.responseCode == 200)
-            {
-                string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
-                if (!string.IsNullOrEmpty(filepath))
-                {
-                    if (File.Exists(filepath))
-                        File.Delete(filepath);
+            } else if ( Configuration.Config.CacheSettings.CacheEnabled && oSession.responseCode == 200 ) {
+                string filepath = TaskRecord.GetAndRemove( oSession.fullUrl );
+                if ( !string.IsNullOrEmpty( filepath ) ) {
+                    if ( File.Exists( filepath ) )
+                        File.Delete( filepath );
 
                     //保存下载文件并记录Modified-Time
-                    try
-                    {
-                        Utility.Logger.Add(2, string.Format("更新缓存文件：{0}.", filepath));
-                        oSession.SaveResponseBody(filepath);
-                        _SaveModifiedTime(filepath, oSession.oResponse.headers["Last-Modified"]);
+                    try {
+                        Utility.Logger.Add( 2, string.Format( "更新缓存文件：{0}.", filepath ) );
+                        oSession.SaveResponseBody( filepath );
+                        _SaveModifiedTime( filepath, oSession.oResponse.headers["Last-Modified"] );
                         //Debug.WriteLine("CACHR> 【下载文件】" + oSession.PathAndQuery);
-                    }
-                    catch (Exception ex)
-                    {
-                        Utility.ErrorReporter.SendErrorReport(ex, "会话结束时，保存返回文件时发生异常：" + oSession.fullUrl);
+                    } catch ( Exception ex ) {
+                        Utility.ErrorReporter.SendErrorReport( ex, "会话结束时，保存返回文件时发生异常：" + oSession.fullUrl );
                     }
                 }
             }
@@ -288,24 +282,21 @@ namespace ElectronicObserver.Observer {
 		}
 
 
-        private void FiddlerApplication_BeforeResponse(Fiddler.Session oSession)
-        {
-            if (oSession.PathAndQuery.StartsWith("/kcs/") && oSession.responseCode == 304)
-            {
-                string filepath = TaskRecord.GetAndRemove(oSession.fullUrl);
+        private void FiddlerApplication_BeforeResponse( Fiddler.Session oSession ) {
+            if ( Configuration.Config.CacheSettings.CacheEnabled && oSession.PathAndQuery.StartsWith( "/kcs/" ) && oSession.responseCode == 304 ) {
+                string filepath = TaskRecord.GetAndRemove( oSession.fullUrl );
                 //只有TaskRecord中有记录的文件才是验证的文件，才需要修改Header
-                if (!string.IsNullOrEmpty(filepath))
-                {
+                if ( !string.IsNullOrEmpty( filepath ) ) {
                     //服务器返回304，文件没有修改 -> 返回本地文件
                     oSession.bBufferResponse = true;
-                    oSession.ResponseBody = File.ReadAllBytes(filepath);
+                    oSession.ResponseBody = File.ReadAllBytes( filepath );
                     oSession.oResponse.headers.HTTPResponseCode = 200;
                     oSession.oResponse.headers.HTTPResponseStatus = "200 OK";
                     oSession.oResponse.headers["Last-Modified"] = oSession.oRequest.headers["If-Modified-Since"];
                     oSession.oResponse.headers["Accept-Ranges"] = "bytes";
-                    oSession.oResponse.headers.Remove("If-Modified-Since");
-                    oSession.oRequest.headers.Remove("If-Modified-Since");
-                    if (filepath.EndsWith(".swf"))
+                    oSession.oResponse.headers.Remove( "If-Modified-Since" );
+                    oSession.oRequest.headers.Remove( "If-Modified-Since" );
+                    if ( filepath.EndsWith( ".swf" ) )
                         oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
                 }
             }
@@ -323,49 +314,41 @@ namespace ElectronicObserver.Observer {
 			}
 
 
-            if (oSession.fullUrl.Contains("/kcs/"))
-            {
+            if ( Configuration.Config.CacheSettings.CacheEnabled && oSession.fullUrl.Contains( "/kcs/" ) ) {
 
                 // = KanColleCacher =
                 string filepath;
-                var direction = cache.GotNewRequest(oSession.fullUrl, out filepath);
-                if (direction == Direction.Return_LocalFile)
-                {
+                var direction = cache.GotNewRequest( oSession.fullUrl, out filepath );
+                if ( direction == Direction.Return_LocalFile ) {
                     //返回本地文件
                     oSession.utilCreateResponseAndBypassServer();
-                    oSession.ResponseBody = File.ReadAllBytes(filepath);
+                    oSession.ResponseBody = File.ReadAllBytes( filepath );
                     oSession.oResponse.headers["Server"] = "Apache";
                     oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
-                    oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString(DateTime.Now);
+                    oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString( DateTime.Now );
                     oSession.oResponse.headers["Connection"] = "close";
                     oSession.oResponse.headers["Accept-Ranges"] = "bytes";
                     filepath = filepath.ToLower();
-                    if (filepath.EndsWith(".swf"))
+                    if ( filepath.EndsWith( ".swf" ) )
                         oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
-                    else if (filepath.EndsWith(".mp3"))
+                    else if ( filepath.EndsWith( ".mp3" ) )
                         oSession.oResponse.headers["Content-Type"] = "audio/mpeg";
-                    else if (filepath.EndsWith(".png"))
+                    else if ( filepath.EndsWith( ".png" ) )
                         oSession.oResponse.headers["Content-Type"] = "image/png";
 
                     //Debug.WriteLine("CACHR> 【返回本地】" + result);
-                }
-                else if (direction == Direction.Verify_LocalFile)
-                {
+                } else if ( direction == Direction.Verify_LocalFile ) {
                     //请求服务器验证文件
-                    oSession.oRequest.headers["If-Modified-Since"] = _GetModifiedTime(filepath);
+                    oSession.oRequest.headers["If-Modified-Since"] = _GetModifiedTime( filepath );
                     oSession.bBufferResponse = true;
 
                     //Debug.WriteLine("CACHR> 【验证文件】" + oSession.PathAndQuery);
-                }
-                else
-                {
+                } else {
                     //下载文件
-                    Utility.Logger.Add(2, string.Format("BeforeRequest: 重新下载文件。{0}", oSession.fullUrl));
+                    Utility.Logger.Add( 2, string.Format( "BeforeRequest: 重新下载文件。{0}", oSession.fullUrl ) );
                 }
 
-            }
-            else if (oSession.fullUrl.Contains("/kcsapi/"))
-            {
+            } else if ( oSession.fullUrl.Contains( "/kcsapi/" ) ) {
 
 				string url = oSession.fullUrl;
 				string body = oSession.GetRequestBodyAsString();
@@ -374,75 +357,63 @@ namespace ElectronicObserver.Observer {
 				{
 					if ( c.SaveReceivedData && c.SaveRequest ) {
 
-						Task.Run( (Action)( () => {
+						Task.Run( (Action) ( () => {
 							SaveRequest( url, body );
 						} ) );
 					}
 				}
 
-				UIControl.BeginInvoke( (Action)( () => { LoadRequest( url, body ); } ) );
-			}
-            else if (oSession.PathAndQuery.StartsWith("/gadget/js/kcs_flash.js"))
-            {
-                try
-                {
-                    string file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.js";
-                    if (File.Exists(file))
-                    {
+				UIControl.BeginInvoke( (Action) ( () => { LoadRequest( url, body ); } ) );
+            } else if ( oSession.PathAndQuery.StartsWith( "/gadget/js/kcs_flash.js" ) ) {
+                try {
+                    string file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.hack.js";
+                    if ( !File.Exists( file ) ) {
+                        file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.js";
+                    }
+                    if ( File.Exists( file ) ) {
                         oSession.utilCreateResponseAndBypassServer();
-                        oSession.ResponseBody = File.ReadAllBytes(file);
+                        oSession.ResponseBody = File.ReadAllBytes( file );
                         oSession.oResponse.headers["Server"] = "Apache";
                         oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
-                        oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString(DateTime.Now);
+                        oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString( DateTime.Now );
                         oSession.oResponse.headers["Connection"] = "close";
                         oSession.oResponse.headers["Accept-Ranges"] = "bytes";
                         oSession.oResponse.headers["Content-Type"] = "application/x-javascript";
 
-                        Utility.Logger.Add(2, "apply custom kcs_flash.js.");
+                        Utility.Logger.Add( 2, "apply custom kcs_flash.js." );
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch ( Exception ex ) {
                     // read error
-                    Utility.ErrorReporter.SendErrorReport(ex, "error to read kcs_flash.js.");
+                    Utility.ErrorReporter.SendErrorReport( ex, "error to read kcs_flash.js." );
                 }
             }
 
 		}
 
 
-        private string _GetModifiedTime(string filepath)
-        {
+        private string _GetModifiedTime( string filepath ) {
             FileInfo fi;
-            DateTime dt = default(DateTime);
-            try
-            {
-                fi = new FileInfo(filepath);
+            DateTime dt = default( DateTime );
+            try {
+                fi = new FileInfo( filepath );
                 dt = fi.LastWriteTime;
-                return GMTHelper.ToGMTString(dt);
-            }
-            catch (Exception ex)
-            {
-                Utility.ErrorReporter.SendErrorReport(ex, "在读取文件修改时间时发生异常：" + dt);
+                return GMTHelper.ToGMTString( dt );
+            } catch ( Exception ex ) {
+                Utility.ErrorReporter.SendErrorReport( ex, "在读取文件修改时间时发生异常：" + dt );
                 return "";
             }
         }
 
-        private void _SaveModifiedTime(string filepath, string gmTime)
-        {
+        private void _SaveModifiedTime( string filepath, string gmTime ) {
             FileInfo fi;
-            try
-            {
-                fi = new FileInfo(filepath);
-                DateTime dt = GMTHelper.GMT2Local(gmTime);
-                if (dt.Year > 1900)
-                {
+            try {
+                fi = new FileInfo( filepath );
+                DateTime dt = GMTHelper.GMT2Local( gmTime );
+                if ( dt.Year > 1900 ) {
                     fi.LastWriteTime = dt;
                 }
-            }
-            catch (Exception ex)
-            {
-                Utility.ErrorReporter.SendErrorReport(ex, string.Format("在保存文件修改时间时发生异常。filepath: {0}, gmTime: {1}", filepath, gmTime));
+            } catch ( Exception ex ) {
+                Utility.ErrorReporter.SendErrorReport( ex, string.Format( "在保存文件修改时间时发生异常。filepath: {0}, gmTime: {1}", filepath, gmTime ) );
             }
         }
 

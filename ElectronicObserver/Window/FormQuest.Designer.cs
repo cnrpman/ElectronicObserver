@@ -59,7 +59,7 @@
 			this.QuestView.AllowUserToAddRows = false;
 			this.QuestView.AllowUserToDeleteRows = false;
 			this.QuestView.AllowUserToResizeRows = false;
-			this.QuestView.BackgroundColor = System.Drawing.SystemColors.Control;
+			this.QuestView.BackgroundColor = System.Drawing.Color.FromArgb( 245, 245, 245 );
 			this.QuestView.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.QuestView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.QuestView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

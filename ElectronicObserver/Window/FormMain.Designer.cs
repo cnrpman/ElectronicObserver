@@ -833,7 +833,8 @@
 			dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
 			dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
 			dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
-			this.MainDockPanel.Skin = dockPanelSkin1;
+			//this.MainDockPanel.Skin = dockPanelSkin1;
+			this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012LightTheme();
 			this.MainDockPanel.TabIndex = 0;
 			// 
 			// FormMain

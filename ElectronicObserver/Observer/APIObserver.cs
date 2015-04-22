@@ -364,29 +364,41 @@ namespace ElectronicObserver.Observer {
 				}
 
 				UIControl.BeginInvoke( (Action) ( () => { LoadRequest( url, body ); } ) );
-            } else if ( oSession.PathAndQuery.StartsWith( "/gadget/js/kcs_flash.js" ) ) {
-                try {
-                    string file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.hack.js";
-                    if ( !File.Exists( file ) ) {
-                        file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs\gadget\js\kcs_flash.js";
-                    }
-                    if ( File.Exists( file ) ) {
-                        oSession.utilCreateResponseAndBypassServer();
-                        oSession.ResponseBody = File.ReadAllBytes( file );
-                        oSession.oResponse.headers["Server"] = "Apache";
-                        oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
-                        oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString( DateTime.Now );
-                        oSession.oResponse.headers["Connection"] = "close";
-                        oSession.oResponse.headers["Accept-Ranges"] = "bytes";
-                        oSession.oResponse.headers["Content-Type"] = "application/x-javascript";
+			} else if ( oSession.PathAndQuery.StartsWith( "/gadget/js/kcs_flash.js" ) ) {
+				try {
+					string path = oSession.PathAndQuery.Replace( '/', '\\' );
+					string hack;
+					int index = path.LastIndexOf( '.' );
+					if ( index > 0 ) {
+						hack = path.Substring( 0, index ) + ".hack" + path.Substring( index );
+					} else {
+						hack = path + ".hack";
+					}
 
-                        Utility.Logger.Add( 2, "apply custom kcs_flash.js." );
-                    }
-                } catch ( Exception ex ) {
-                    // read error
-                    Utility.ErrorReporter.SendErrorReport( ex, "error to read kcs_flash.js." );
-                }
-            }
+					string file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs" + hack;
+					bool hasHack = File.Exists( file );
+					if ( !hasHack ) {
+						file = ElectronicObserver.Utility.Configuration.Config.CacheSettings.CacheFolder + @"\kcs" + path;
+					}
+					if ( hasHack || File.Exists( file ) ) {
+						oSession.utilCreateResponseAndBypassServer();
+						oSession.ResponseBody = File.ReadAllBytes( file );
+						oSession.oResponse.headers["Server"] = "Apache";
+						oSession.oResponse.headers["Cache-Control"] = "max-age=18000, public";
+						oSession.oResponse.headers["Date"] = GMTHelper.ToGMTString( DateTime.Now );
+						oSession.oResponse.headers["Connection"] = "close";
+						oSession.oResponse.headers["Accept-Ranges"] = "bytes";
+						oSession.oResponse.headers["Content-Type"] = "application/x-javascript";
+
+						if ( hasHack ) {
+							Utility.Logger.Add( 2, string.Format( "apply custom {0}.", hack ) );
+						}
+					}
+				} catch ( Exception ex ) {
+					// read error
+					Utility.ErrorReporter.SendErrorReport( ex, "error to request gadget and kcscontents." );
+				}
+			}
 
 		}
 

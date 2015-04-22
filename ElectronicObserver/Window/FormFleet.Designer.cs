@@ -136,7 +136,6 @@
 			this.AutoHidePortion = 150D;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoScroll = true;
-			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(300, 200);
 			this.Controls.Add(this.TableFleet);
 			this.Controls.Add(this.TableMember);

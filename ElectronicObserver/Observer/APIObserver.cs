@@ -310,7 +310,7 @@ namespace ElectronicObserver.Observer {
 
 			// 上流プロキシ設定
 			if ( c.UseUpstreamProxy ) {
-				oSession["X-OverrideGateway"] = string.Format( "localhost:{0}", c.UpstreamProxyPort );
+				oSession["X-OverrideGateway"] = string.Format( "{0}:{1}", c.UpstreamProxyHost, c.UpstreamProxyPort );
 			}
 
 

@@ -269,6 +269,7 @@ namespace ElectronicObserver.Window.Dialog {
 			Connection_ApplyVersion.Checked = config.Connection.ApplyVersion;
 			Connection_RegisterAsSystemProxy.Checked = config.Connection.RegisterAsSystemProxy;
 			Connection_UseUpstreamProxy.Checked = config.Connection.UseUpstreamProxy;
+			Connection_UpstreamProxyHost.Text = config.Connection.UpstreamProxyHost;
 			Connection_UpstreamProxyPort.Value = config.Connection.UpstreamProxyPort;
 
 			//[UI]
@@ -398,6 +399,7 @@ namespace ElectronicObserver.Window.Dialog {
 				config.Connection.RegisterAsSystemProxy = Connection_RegisterAsSystemProxy.Checked;
 
 				config.Connection.UseUpstreamProxy = Connection_UseUpstreamProxy.Checked;
+				config.Connection.UpstreamProxyHost = Connection_UpstreamProxyHost.Text;
 				config.Connection.UpstreamProxyPort = (ushort)Connection_UpstreamProxyPort.Value;
 
 				if ( changed ) {

@@ -26,6 +26,7 @@
 			this.components = new System.ComponentModel.Container();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.Connection_UpstreamProxyHost = new System.Windows.Forms.TextBox();
 			this.Connection_UpstreamProxyPort = new System.Windows.Forms.NumericUpDown();
 			this.Connection_UseUpstreamProxy = new System.Windows.Forms.CheckBox();
 			this.Connection_RegisterAsSystemProxy = new System.Windows.Forms.CheckBox();
@@ -187,7 +188,8 @@
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.Connection_UpstreamProxyPort);
+			this.tabPage1.Controls.Add( this.Connection_UpstreamProxyHost );
+			this.tabPage1.Controls.Add( this.Connection_UpstreamProxyPort );
 			this.tabPage1.Controls.Add(this.Connection_UseUpstreamProxy);
 			this.tabPage1.Controls.Add(this.Connection_RegisterAsSystemProxy);
 			this.tabPage1.Controls.Add(this.Connection_OutputConnectionScript);
@@ -204,9 +206,17 @@
 			this.tabPage1.Text = "通信";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
+			// Connection_UpstreamProxyHost
+			// 
+			this.Connection_UpstreamProxyHost.Location = new System.Drawing.Point(176, 35);
+			this.Connection_UpstreamProxyHost.Name = "Connection_UpstreamProxyHost";
+			this.Connection_UpstreamProxyHost.Size = new System.Drawing.Size(145, 23);
+			this.Connection_UpstreamProxyHost.TabIndex = 4;
+			this.Connection_UpstreamProxyHost.Text = "localhost";
+			// 
 			// Connection_UpstreamProxyPort
 			// 
-			this.Connection_UpstreamProxyPort.Location = new System.Drawing.Point(164, 35);
+			this.Connection_UpstreamProxyPort.Location = new System.Drawing.Point(327, 35);
 			this.Connection_UpstreamProxyPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -1585,6 +1595,7 @@
 		private System.Windows.Forms.CheckBox Life_TopMost;
 		private System.Windows.Forms.ComboBox Log_FileEncodingID;
 		private System.Windows.Forms.ComboBox FormFleet_SearchingAbilityMethod;
+		private System.Windows.Forms.TextBox Connection_UpstreamProxyHost;
 		private System.Windows.Forms.NumericUpDown Connection_UpstreamProxyPort;
 		private System.Windows.Forms.CheckBox Connection_UseUpstreamProxy;
 		private System.Windows.Forms.CheckBox Connection_RegisterAsSystemProxy;

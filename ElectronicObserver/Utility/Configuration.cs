@@ -101,6 +101,11 @@ namespace ElectronicObserver.Utility {
 				public bool UseUpstreamProxy { get; set; }
 
 				/// <summary>
+				/// Upstream porxy host address
+				/// </summary>
+				public string UpstreamProxyHost { get; set; }
+
+				/// <summary>
 				/// 上流プロキシのポート番号
 				/// </summary>
 				public ushort UpstreamProxyPort { get; set; }
@@ -118,6 +123,7 @@ namespace ElectronicObserver.Utility {
 					ApplyVersion = false;
 					RegisterAsSystemProxy = false;
 					UseUpstreamProxy = false;
+					UpstreamProxyHost = @"localhost";
 					UpstreamProxyPort = 0;
 
 				}

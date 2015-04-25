@@ -133,5 +133,11 @@ namespace BrowserLib {
 		[DataMember]
 		public bool ConfirmAtRefresh { get; set; }
 
+		/// <summary>
+		/// 直连swf时替换的embed元素
+		/// </summary>
+		[DataMember]
+		public string EmbedHtml { get; set; }
+
 	}
 }

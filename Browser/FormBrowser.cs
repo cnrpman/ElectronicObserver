@@ -205,11 +205,31 @@ namespace Browser {
 		}
 
 		private void Browser_DocumentCompleted( object sender, WebBrowserDocumentCompletedEventArgs e ) {
+			ReplaceEmbedHtml();
 
 			StyleSheetApplied = false;
 			ApplyStyleSheet();
 
 			ApplyZoom();
+		}
+
+		/// <summary>
+		/// 应用embed元素
+		/// </summary>
+		private void ReplaceEmbedHtml() {
+			if ( string.IsNullOrEmpty( Configuration.EmbedHtml ) )
+				return;
+
+			try {
+				var document = Browser.Document;
+				string url;
+				if ( document != null && ( url = document.Url.ToString() ).Contains( ".swf?" ) ) {
+					document.Body.InnerHtml = string.Format( Configuration.EmbedHtml, url );
+				}
+			} catch ( Exception ex ) {
+				BrowserHost.AsyncRemoteRun( () =>
+					BrowserHost.Proxy.SendErrorReport( ex.ToString(), "embed元素应用失败。" ) );
+			}
 		}
 
 		/// <summary>

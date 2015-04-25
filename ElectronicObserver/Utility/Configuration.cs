@@ -536,6 +536,10 @@ namespace ElectronicObserver.Utility {
 				/// </summary>
 				public bool ConfirmAtRefresh { get; set; }
 
+				/// <summary>
+				/// 直连swf时替换的embed元素
+				/// </summary>
+				public string EmbedHtml { get; set; }
 
 				public ConfigFormBrowser() {
 					ZoomRate = 100;
@@ -549,6 +553,7 @@ namespace ElectronicObserver.Utility {
 					ToolMenuDockStyle = DockStyle.Top;
 					IsToolMenuVisible = true;
 					ConfirmAtRefresh = true;
+					EmbedHtml = "<embed width=\"800\" height=\"480\" wmode=\"opaque\" quality=\"high\" bgcolor=\"#000\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\" src=\"{0}\">";
 				}
 			}
 			/// <summary>[ブラウザ]ウィンドウ</summary>

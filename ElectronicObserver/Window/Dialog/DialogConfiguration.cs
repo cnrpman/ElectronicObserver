@@ -52,7 +52,7 @@ namespace ElectronicObserver.Window.Dialog {
 				ToolTipInfo.SetToolTip( Connection_SaveDataPath, null );
 			} else {
 				Connection_SaveDataPath.BackColor = Color.MistyRose;
-				ToolTipInfo.SetToolTip( Connection_SaveDataPath, "指定されたフォルダは存在しません。" );
+				ToolTipInfo.SetToolTip( Connection_SaveDataPath, "指定的文件夹不存在。" );
 			}
 		}
 
@@ -354,7 +354,7 @@ namespace ElectronicObserver.Window.Dialog {
 					FormBrowser_BrowserVersion.Text = DefaultBrowserVersion.ToString();
 					FormBrowser_GPURendering.Checked = DefaultGPURendering;
 
-					Utility.Logger.Add( 3, "レジストリからの読み込みに失敗しました。" + ex.Message );
+					Utility.Logger.Add( 3, "注册表读取失败。" + ex.Message );
 
 				} finally {
 					if ( reg != null )
@@ -482,7 +482,7 @@ namespace ElectronicObserver.Window.Dialog {
 
 		private void FormBrowser_ApplyRegistry_Click( object sender, EventArgs e ) {
 
-			if ( MessageBox.Show( "レジストリに登録します。よろしいですか？\r\n＊完全に適用するには再起動が必要です。", "確認",
+			if ( MessageBox.Show( "确认写入注册表吗？\r\n＊需要重新启动以完全适用。", "确认",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2 )
 				== System.Windows.Forms.DialogResult.Yes ) {
 
@@ -498,8 +498,8 @@ namespace ElectronicObserver.Window.Dialog {
 
 				} catch ( Exception ex ) {
 
-					Utility.ErrorReporter.SendErrorReport( ex, "レジストリへの書き込みに失敗しました。" );
-					MessageBox.Show( "レジストリへの書き込みに失敗しました。\r\n" + ex.Message, "エラー", 
+					Utility.ErrorReporter.SendErrorReport( ex, "注册表写入失败。" );
+					MessageBox.Show( "注册表写入失败。\r\n" + ex.Message, "错误", 
 						MessageBoxButtons.OK, MessageBoxIcon.Error );
 					
 				} finally {
@@ -512,7 +512,7 @@ namespace ElectronicObserver.Window.Dialog {
 
 		private void FormBrowser_DeleteRegistry_Click( object sender, EventArgs e ) {
 
-			if ( MessageBox.Show( "レジストリを削除します。よろしいですか？\r\n＊完全に適用するには再起動が必要です。", "確認",
+			if ( MessageBox.Show( "确认删除注册表项吗？\r\n＊需要重新启动以完全适用。", "确认",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2 )
 				== System.Windows.Forms.DialogResult.Yes ) {
 				
@@ -528,8 +528,8 @@ namespace ElectronicObserver.Window.Dialog {
 
 				} catch ( Exception ex ) {
 
-					Utility.ErrorReporter.SendErrorReport( ex, "レジストリの削除に失敗しました。" );
-					MessageBox.Show( "レジストリの削除に失敗しました。\r\n" + ex.Message, "エラー",
+					Utility.ErrorReporter.SendErrorReport( ex, "注册表项删除失败。" );
+					MessageBox.Show( "注册表项删除失败。\r\n" + ex.Message, "错误",
 						MessageBoxButtons.OK, MessageBoxIcon.Error );
 
 				} finally {

@@ -321,6 +321,7 @@ namespace ElectronicObserver.Window.Dialog {
 
 			FormBrowser_IsEnabled.Checked = config.FormBrowser.IsEnabled;
 			FormBrowser_ZoomRate.Value = config.FormBrowser.ZoomRate;
+			FormBrowser_ZoomFit.Checked = config.FormBrowser.ZoomFit;
 			FormBrowser_LogInPageURL.Text = config.FormBrowser.LogInPageURL;
 			FormBrowser_ScreenShotFormat_JPEG.Checked = config.FormBrowser.ScreenShotFormat == 1;
 			FormBrowser_ScreenShotFormat_PNG.Checked = config.FormBrowser.ScreenShotFormat == 2;
@@ -455,6 +456,7 @@ namespace ElectronicObserver.Window.Dialog {
 
 			config.FormBrowser.IsEnabled = FormBrowser_IsEnabled.Checked;
 			config.FormBrowser.ZoomRate = (int)FormBrowser_ZoomRate.Value;
+			config.FormBrowser.ZoomFit = FormBrowser_ZoomFit.Checked;
 			config.FormBrowser.LogInPageURL = FormBrowser_LogInPageURL.Text;
 			if ( FormBrowser_ScreenShotFormat_JPEG.Checked )
 				config.FormBrowser.ScreenShotFormat = 1;
@@ -501,7 +503,7 @@ namespace ElectronicObserver.Window.Dialog {
 					Utility.ErrorReporter.SendErrorReport( ex, "注册表写入失败。" );
 					MessageBox.Show( "注册表写入失败。\r\n" + ex.Message, "错误", 
 						MessageBoxButtons.OK, MessageBoxIcon.Error );
-					
+
 				} finally {
 					if ( reg != null )
 						reg.Close();
@@ -515,7 +517,7 @@ namespace ElectronicObserver.Window.Dialog {
 			if ( MessageBox.Show( "确认删除注册表项吗？\r\n＊需要重新启动以完全适用。", "确认",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2 )
 				== System.Windows.Forms.DialogResult.Yes ) {
-				
+
 				Microsoft.Win32.RegistryKey reg = null;
 
 				try {

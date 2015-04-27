@@ -75,6 +75,7 @@
 			this.Debug_APIListPathSearch = new System.Windows.Forms.Button();
 			this.Debug_EnableDebugMenu = new System.Windows.Forms.CheckBox();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
+			this.Life_ShowStatusBar = new System.Windows.Forms.CheckBox();
 			this.Life_CheckUpdateInformation = new System.Windows.Forms.CheckBox();
 			this.Life_LayoutFilePathSearch = new System.Windows.Forms.Button();
 			this.Life_LayoutFilePath = new System.Windows.Forms.TextBox();
@@ -138,7 +139,7 @@
 			this.FontSelector = new System.Windows.Forms.FontDialog();
 			this.LayoutFileBrowser = new System.Windows.Forms.OpenFileDialog();
 			this.APIListBrowser = new System.Windows.Forms.OpenFileDialog();
-			this.Life_ShowStatusBar = new System.Windows.Forms.CheckBox();
+			this.FormBrowser_ZoomFit = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -764,6 +765,16 @@
 			this.tabPage6.Text = "窗口";
 			this.tabPage6.UseVisualStyleBackColor = true;
 			// 
+			// Life_ShowStatusBar
+			// 
+			this.Life_ShowStatusBar.AutoSize = true;
+			this.Life_ShowStatusBar.Location = new System.Drawing.Point(11, 110);
+			this.Life_ShowStatusBar.Name = "Life_ShowStatusBar";
+			this.Life_ShowStatusBar.Size = new System.Drawing.Size(143, 19);
+			this.Life_ShowStatusBar.TabIndex = 6;
+			this.Life_ShowStatusBar.Text = "显示状态栏";
+			this.Life_ShowStatusBar.UseVisualStyleBackColor = true;
+			// 
 			// Life_CheckUpdateInformation
 			// 
 			this.Life_CheckUpdateInformation.AutoSize = true;
@@ -1073,6 +1084,7 @@
 			// 
 			// tabPage12
 			// 
+			this.tabPage12.Controls.Add(this.FormBrowser_ZoomFit);
 			this.tabPage12.Controls.Add(this.groupBox3);
 			this.tabPage12.Controls.Add(this.FormBrowser_AppliesStyleSheet);
 			this.tabPage12.Controls.Add(this.FormBrowser_ConfirmAtRefresh);
@@ -1083,10 +1095,10 @@
 			this.tabPage12.Controls.Add(this.FormBrowser_LogInPageURL);
 			this.tabPage12.Controls.Add(this.FormBrowser_ZoomRate);
 			this.tabPage12.Controls.Add(this.label15);
-			this.tabPage12.Location = new System.Drawing.Point(4, 22);
+			this.tabPage12.Location = new System.Drawing.Point(4, 24);
 			this.tabPage12.Name = "tabPage12";
 			this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage12.Size = new System.Drawing.Size(442, 221);
+			this.tabPage12.Size = new System.Drawing.Size(442, 219);
 			this.tabPage12.TabIndex = 3;
 			this.tabPage12.Text = "浏览器";
 			this.tabPage12.UseVisualStyleBackColor = true;
@@ -1101,7 +1113,7 @@
 			this.groupBox3.Location = new System.Drawing.Point(6, 165);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(430, 46);
-			this.groupBox3.TabIndex = 5;
+			this.groupBox3.TabIndex = 10;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "注册表";
 			// 
@@ -1121,7 +1133,7 @@
 			this.FormBrowser_BrowserVersion.Location = new System.Drawing.Point(112, 16);
 			this.FormBrowser_BrowserVersion.Name = "FormBrowser_BrowserVersion";
 			this.FormBrowser_BrowserVersion.Size = new System.Drawing.Size(60, 23);
-			this.FormBrowser_BrowserVersion.TabIndex = 9;
+			this.FormBrowser_BrowserVersion.TabIndex = 1;
 			this.FormBrowser_BrowserVersion.Text = "7000";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_BrowserVersion, "指定内置浏览器版本。\r\n7000相当于IE7、8000相当于IE8、11000相当于IE11。\r\n变更版本可能会导致操作发生变化。");
 			// 
@@ -1131,7 +1143,7 @@
 			this.FormBrowser_DeleteRegistry.Location = new System.Drawing.Point(374, 15);
 			this.FormBrowser_DeleteRegistry.Name = "FormBrowser_DeleteRegistry";
 			this.FormBrowser_DeleteRegistry.Size = new System.Drawing.Size(50, 23);
-			this.FormBrowser_DeleteRegistry.TabIndex = 13;
+			this.FormBrowser_DeleteRegistry.TabIndex = 4;
 			this.FormBrowser_DeleteRegistry.Text = "删除";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_DeleteRegistry, "删除注册表项。");
 			this.FormBrowser_DeleteRegistry.UseVisualStyleBackColor = true;
@@ -1143,7 +1155,7 @@
 			this.FormBrowser_GPURendering.Location = new System.Drawing.Point(180, 18);
 			this.FormBrowser_GPURendering.Name = "FormBrowser_GPURendering";
 			this.FormBrowser_GPURendering.Size = new System.Drawing.Size(103, 19);
-			this.FormBrowser_GPURendering.TabIndex = 10;
+			this.FormBrowser_GPURendering.TabIndex = 2;
 			this.FormBrowser_GPURendering.Text = "GPU渲染";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_GPURendering, "指定使用内置浏览器的GPU渲染。\r\n可以加速环境处理。");
 			this.FormBrowser_GPURendering.UseVisualStyleBackColor = true;
@@ -1154,7 +1166,7 @@
 			this.FormBrowser_ApplyRegistry.Location = new System.Drawing.Point(318, 15);
 			this.FormBrowser_ApplyRegistry.Name = "FormBrowser_ApplyRegistry";
 			this.FormBrowser_ApplyRegistry.Size = new System.Drawing.Size(50, 23);
-			this.FormBrowser_ApplyRegistry.TabIndex = 12;
+			this.FormBrowser_ApplyRegistry.TabIndex = 3;
 			this.FormBrowser_ApplyRegistry.Text = "应用";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_ApplyRegistry, "应用到注册表中。\r\n请注意点击下面[OK]按钮时无法适用，请重启生效。");
 			this.FormBrowser_ApplyRegistry.UseVisualStyleBackColor = true;
@@ -1166,16 +1178,16 @@
 			this.label19.Location = new System.Drawing.Point(6, 19);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(100, 15);
-			this.label19.TabIndex = 11;
+			this.label19.TabIndex = 0;
 			this.label19.Text = "浏览器版本：";
 			// 
 			// FormBrowser_AppliesStyleSheet
 			// 
 			this.FormBrowser_AppliesStyleSheet.AutoSize = true;
-			this.FormBrowser_AppliesStyleSheet.Location = new System.Drawing.Point(180, 31);
+			this.FormBrowser_AppliesStyleSheet.Location = new System.Drawing.Point(282, 31);
 			this.FormBrowser_AppliesStyleSheet.Name = "FormBrowser_AppliesStyleSheet";
 			this.FormBrowser_AppliesStyleSheet.Size = new System.Drawing.Size(142, 19);
-			this.FormBrowser_AppliesStyleSheet.TabIndex = 8;
+			this.FormBrowser_AppliesStyleSheet.TabIndex = 6;
 			this.FormBrowser_AppliesStyleSheet.Text = "应用样式表";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_AppliesStyleSheet, "在艦これ页面中会生效。\r\n如果显示错乱，请禁用此项。");
 			this.FormBrowser_AppliesStyleSheet.UseVisualStyleBackColor = true;
@@ -1183,10 +1195,10 @@
 			// FormBrowser_ConfirmAtRefresh
 			// 
 			this.FormBrowser_ConfirmAtRefresh.AutoSize = true;
-			this.FormBrowser_ConfirmAtRefresh.Location = new System.Drawing.Point(180, 6);
+			this.FormBrowser_ConfirmAtRefresh.Location = new System.Drawing.Point(282, 6);
 			this.FormBrowser_ConfirmAtRefresh.Name = "FormBrowser_ConfirmAtRefresh";
 			this.FormBrowser_ConfirmAtRefresh.Size = new System.Drawing.Size(148, 19);
-			this.FormBrowser_ConfirmAtRefresh.TabIndex = 7;
+			this.FormBrowser_ConfirmAtRefresh.TabIndex = 5;
 			this.FormBrowser_ConfirmAtRefresh.Text = "刷新时确认";
 			this.ToolTipInfo.SetToolTip(this.FormBrowser_ConfirmAtRefresh, "刷新时提示确认，通过才会刷新。\r\n防止误操作。");
 			this.FormBrowser_ConfirmAtRefresh.UseVisualStyleBackColor = true;
@@ -1203,7 +1215,7 @@
 			this.groupBox2.Location = new System.Drawing.Point(6, 88);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(430, 77);
-			this.groupBox2.TabIndex = 6;
+			this.groupBox2.TabIndex = 9;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "屏幕截图";
 			// 
@@ -1264,7 +1276,7 @@
 			this.label17.Location = new System.Drawing.Point(6, 62);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(72, 15);
-			this.label17.TabIndex = 5;
+			this.label17.TabIndex = 7;
 			this.label17.Text = "登录URL:";
 			// 
 			// label16
@@ -1273,7 +1285,7 @@
 			this.label16.Location = new System.Drawing.Point(148, 32);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(19, 15);
-			this.label16.TabIndex = 4;
+			this.label16.TabIndex = 3;
 			this.label16.Text = "％";
 			// 
 			// FormBrowser_IsEnabled
@@ -1282,7 +1294,7 @@
 			this.FormBrowser_IsEnabled.Location = new System.Drawing.Point(6, 6);
 			this.FormBrowser_IsEnabled.Name = "FormBrowser_IsEnabled";
 			this.FormBrowser_IsEnabled.Size = new System.Drawing.Size(116, 19);
-			this.FormBrowser_IsEnabled.TabIndex = 3;
+			this.FormBrowser_IsEnabled.TabIndex = 0;
 			this.FormBrowser_IsEnabled.Text = "启动时加载页面";
 			this.FormBrowser_IsEnabled.UseVisualStyleBackColor = true;
 			// 
@@ -1293,7 +1305,7 @@
 			this.FormBrowser_LogInPageURL.Location = new System.Drawing.Point(82, 59);
 			this.FormBrowser_LogInPageURL.Name = "FormBrowser_LogInPageURL";
 			this.FormBrowser_LogInPageURL.Size = new System.Drawing.Size(354, 23);
-			this.FormBrowser_LogInPageURL.TabIndex = 2;
+			this.FormBrowser_LogInPageURL.TabIndex = 8;
 			// 
 			// FormBrowser_ZoomRate
 			// 
@@ -1310,7 +1322,7 @@
             0});
 			this.FormBrowser_ZoomRate.Name = "FormBrowser_ZoomRate";
 			this.FormBrowser_ZoomRate.Size = new System.Drawing.Size(60, 23);
-			this.FormBrowser_ZoomRate.TabIndex = 1;
+			this.FormBrowser_ZoomRate.TabIndex = 2;
 			this.FormBrowser_ZoomRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.FormBrowser_ZoomRate.Value = new decimal(new int[] {
             10,
@@ -1324,7 +1336,7 @@
 			this.label15.Location = new System.Drawing.Point(6, 32);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(73, 15);
-			this.label15.TabIndex = 0;
+			this.label15.TabIndex = 1;
 			this.label15.Text = "缩放倍率：";
 			// 
 			// tabPage11
@@ -1449,15 +1461,16 @@
 			this.APIListBrowser.Filter = "Text File|*.txt|File|*";
 			this.APIListBrowser.Title = "打开API列表";
 			// 
-			// Life_ShowStatusBar
+			// FormBrowser_ZoomFit
 			// 
-			this.Life_ShowStatusBar.AutoSize = true;
-			this.Life_ShowStatusBar.Location = new System.Drawing.Point(11, 110);
-			this.Life_ShowStatusBar.Name = "Life_ShowStatusBar";
-			this.Life_ShowStatusBar.Size = new System.Drawing.Size(143, 19);
-			this.Life_ShowStatusBar.TabIndex = 6;
-			this.Life_ShowStatusBar.Text = "显示状态栏";
-			this.Life_ShowStatusBar.UseVisualStyleBackColor = true;
+			this.FormBrowser_ZoomFit.AutoSize = true;
+			this.FormBrowser_ZoomFit.Location = new System.Drawing.Point(173, 31);
+			this.FormBrowser_ZoomFit.Name = "FormBrowser_ZoomFit";
+			this.FormBrowser_ZoomFit.Size = new System.Drawing.Size(61, 19);
+			this.FormBrowser_ZoomFit.TabIndex = 4;
+			this.FormBrowser_ZoomFit.Text = "自适应";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_ZoomFit, "随着窗口扩大缩小自适应。");
+			this.FormBrowser_ZoomFit.UseVisualStyleBackColor = true;
 			// 
 			// DialogConfiguration
 			// 
@@ -1640,5 +1653,6 @@
 		private System.Windows.Forms.Button FormBrowser_ApplyRegistry;
 		private System.Windows.Forms.Label label19;
 		private System.Windows.Forms.CheckBox Life_ShowStatusBar;
+		private System.Windows.Forms.CheckBox FormBrowser_ZoomFit;
 	}
 }

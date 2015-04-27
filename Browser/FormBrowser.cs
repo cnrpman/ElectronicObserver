@@ -385,10 +385,10 @@ namespace Browser {
 
 			var wb = Browser;
 
-			if ( !IsKanColleLoaded ) {
-				AddLog( 3, string.Format( "艦これが読み込まれていないため、スクリーンショットを撮ることはできません。" ) );
-				return;
-			}
+			//if ( !IsKanColleLoaded ) {
+			//	AddLog( 3, string.Format( "艦これが読み込まれていないため、スクリーンショットを撮ることはできません。" ) );
+			//	return;
+			//}
 
 			try {
 

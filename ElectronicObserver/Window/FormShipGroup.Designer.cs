@@ -145,7 +145,7 @@
 			this.ShipView.ContextMenuStrip = this.MenuMember;
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle8.Font = Program.Window_Font;
 			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
 			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -417,7 +417,7 @@
 			// 
 			// MenuMember
 			// 
-            this.MenuMember.Renderer = ToolStripCustomizer.ToolStripRender.Render;
+			ToolStripCustomizer.ToolStripRender.SetRender(this.MenuMember);
 			this.MenuMember.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMember_AddToGroup,
             this.MenuMember_CreateGroup,
@@ -512,7 +512,7 @@
 			// 
 			// MenuGroup
 			// 
-            this.MenuGroup.Renderer = ToolStripCustomizer.ToolStripRender.Render;
+			ToolStripCustomizer.ToolStripRender.SetRender(this.MenuGroup);
 			this.MenuGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuGroup_Add,
             this.MenuGroup_Rename,
@@ -638,7 +638,7 @@
 			this.ClientSize = new System.Drawing.Size(300, 200);
 			this.Controls.Add(this.splitContainer1);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormShipGroup";

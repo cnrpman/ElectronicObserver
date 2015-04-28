@@ -54,16 +54,17 @@
 			// TableBottom
 			// 
 			this.TableBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TableBottom.ColumnCount = 3;
+			this.TableBottom.ColumnCount = 4;
 			this.TableBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+			this.TableBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
 			this.TableBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
 			this.TableBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
 			this.TableBottom.Controls.Add(this.FleetFriend, 0, 0);
 			this.TableBottom.Controls.Add(this.DamageFriend, 0, 7);
-			this.TableBottom.Controls.Add(this.WinRank, 1, 7);
-			this.TableBottom.Controls.Add(this.DamageEnemy, 2, 7);
-			this.TableBottom.Controls.Add(this.FleetCombined, 1, 0);
-			this.TableBottom.Controls.Add(this.FleetEnemy, 2, 0);
+			this.TableBottom.Controls.Add(this.WinRank, 2, 7);
+			this.TableBottom.Controls.Add(this.DamageEnemy, 3, 7);
+			this.TableBottom.Controls.Add(this.FleetCombined, 2, 0);
+			this.TableBottom.Controls.Add(this.FleetEnemy, 3, 0);
 			this.TableBottom.Location = new System.Drawing.Point(3, 90);
 			this.TableBottom.Name = "TableBottom";
 			this.TableBottom.RowCount = 8;
@@ -80,7 +81,7 @@
 			this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TableBottom.Size = new System.Drawing.Size(252, 168);
+			this.TableBottom.Size = new System.Drawing.Size(312, 168);
 			this.TableBottom.TabIndex = 1;
 			this.TableBottom.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.TableBottom_CellPaint);
 			// 
@@ -361,10 +362,10 @@
 			// 
 			this.AutoHidePortion = 150D;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(300, 300);
+			this.ClientSize = new System.Drawing.Size(340, 300);
 			this.Controls.Add(this.BaseLayoutPanel);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormBattle";

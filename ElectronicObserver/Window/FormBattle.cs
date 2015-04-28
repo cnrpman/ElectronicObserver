@@ -24,7 +24,7 @@ namespace ElectronicObserver.Window {
 
 
 		private List<ShipStatusHP> HPBars;
-        private List<Label> DamageLabels;
+		private List<ImageLabel> DamageLabels;
 
 		public Font MainFont { get; set; }
 		public Font SubFont { get; set; }
@@ -34,12 +34,6 @@ namespace ElectronicObserver.Window {
 		public FormBattle( FormMain parent ) {
 			InitializeComponent();
 
-            this.TableBottom.SuspendLayout();
-            this.TableBottom.ColumnCount = 4;
-            this.TableBottom.Size = new System.Drawing.Size(340, 168);
-            this.TableBottom.ResumeLayout(false);
-            this.TableBottom.PerformLayout();
-
 			ControlHelper.SetDoubleBuffered( TableTop );
 			ControlHelper.SetDoubleBuffered( TableBottom );
 
@@ -47,19 +41,24 @@ namespace ElectronicObserver.Window {
 			ConfigurationChanged();
 
 			HPBars = new List<ShipStatusHP>( 18 );
-            DamageLabels = new List<Label>(6);
+			DamageLabels = new List<ImageLabel>(6);
 
 
 			TableBottom.SuspendLayout();
             for (int i = 0; i < 6; i++)
             {
-                var lbl = new Label();
+				var lbl = new ImageLabel
+				{
+					ImageList = ResourceManager.Instance.Icons,
+					ImageIndex = (int)ResourceManager.IconContent.ConditionNormal,
+					ImageAlign = ContentAlignment.MiddleRight,
+					Size = new Size(56, 20),
+					Margin = new Padding(2, 0, 2, 0),
+					Anchor = AnchorStyles.None,
+					Font = MainFont
+				};
                 DamageLabels.Add(lbl);
-                lbl.Size = new Size(36, 20);
-                lbl.Margin = new Padding(2, 0, 2, 0);
-                lbl.Anchor = AnchorStyles.None;
-                lbl.Font = MainFont;
-                TableBottom.Controls.Add(lbl, 3, i + 1);
+                TableBottom.Controls.Add(lbl, 1, i + 1);
             }
 
             for (int i = 0; i < 18; i++)
@@ -80,11 +79,11 @@ namespace ElectronicObserver.Window {
                 }
                 else if (i < 12)
                 {
-                    TableBottom.Controls.Add(HPBars[i], 2, i - 5);
+                    TableBottom.Controls.Add(HPBars[i], 3, i - 5);
                 }
                 else
                 {
-                    TableBottom.Controls.Add(HPBars[i], 1, i - 11);
+                    TableBottom.Controls.Add(HPBars[i], 2, i - 11);
                 }
             }
 			TableBottom.ResumeLayout();
@@ -172,10 +171,17 @@ namespace ElectronicObserver.Window {
 						SetHPNormal( hp, bm.BattleDay );
 						SetDamageRateNormal( hp, bm.BattleDay );
 
+						double maxdmg = 0;
+						int mvp = 0;
                         for (int i = 0; i < 6; i++)
                         {
                             if (damages[i] > 0)
                             {
+								if (damages[i] > maxdmg)
+								{
+									maxdmg = damages[i];
+									mvp = i;
+								}
                                 DamageLabels[i].Text = damages[i].ToString();
                                 DamageLabels[i].Visible = true;
                             }
@@ -184,6 +190,7 @@ namespace ElectronicObserver.Window {
                                 DamageLabels[i].Visible = false;
                             }
                         }
+						DamageLabels[mvp].ImageIndex = (int)ResourceManager.IconContent.ConditionSparkle;
 
                         BaseLayoutPanel.Visible = true;
 					} break;

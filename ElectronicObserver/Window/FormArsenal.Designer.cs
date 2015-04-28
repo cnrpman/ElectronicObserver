@@ -58,7 +58,7 @@
 			// 
 			// MenuMain
 			// 
-            this.MenuMain.Renderer = ToolStripCustomizer.ToolStripRender.Render;
+			ToolStripCustomizer.ToolStripRender.SetRender(this.MenuMain);
 			this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMain_ShowShipName});
 			this.MenuMain.Name = "MenuMain";
@@ -80,7 +80,7 @@
 			this.ContextMenuStrip = this.MenuMain;
 			this.Controls.Add(this.TableArsenal);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormArsenal";

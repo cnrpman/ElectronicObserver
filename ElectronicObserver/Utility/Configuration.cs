@@ -135,7 +135,6 @@ namespace ElectronicObserver.Utility {
 
 
 			public class ConfigUI : ConfigPartBase {
-
 				/// <summary>
 				/// メインフォント
 				/// </summary>

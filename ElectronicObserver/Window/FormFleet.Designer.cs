@@ -74,7 +74,7 @@
 			// 
 			// ContextMenuFleet
 			// 
-            this.ContextMenuFleet.Renderer = ToolStripCustomizer.ToolStripRender.Render;
+			ToolStripCustomizer.ToolStripRender.SetRender(this.ContextMenuFleet);
 			this.ContextMenuFleet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ContextMenuFleet_CopyFleet,
             this.ContextMenuFleet_Capture,
@@ -141,7 +141,7 @@
 			this.Controls.Add(this.TableFleet);
 			this.Controls.Add(this.TableMember);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

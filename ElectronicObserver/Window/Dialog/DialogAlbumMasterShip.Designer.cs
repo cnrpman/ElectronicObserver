@@ -170,6 +170,7 @@
 			// 
 			// menuStrip1
 			// 
+			ToolStripCustomizer.ToolStripRender.SetRender(this.menuStrip1);
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripMenu_File});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -233,7 +234,7 @@
             this.ShipView_Name});
 			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle6.Font = Program.Window_Font;
 			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
 			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
@@ -1767,7 +1768,7 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.menuStrip1);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.MainMenuStrip = this.menuStrip1;
 			this.MinimumSize = new System.Drawing.Size(816, 518);
 			this.Name = "DialogAlbumMasterShip";

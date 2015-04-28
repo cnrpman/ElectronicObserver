@@ -526,7 +526,8 @@ namespace ElectronicObserver.Window {
 				TextEnemyFleetName.Text = fdata.FleetName;
 				TextFormation.Text = Constants.GetFormationShort( fdata.Formation );
 				TextFormation.Visible = true;
-				TextAirSuperiority.Text = Calculator.GetAirSuperiority( fdata.FleetMember ).ToString();
+				int airSuperiority = Calculator.GetAirSuperiority( fdata.FleetMember );
+				TextAirSuperiority.Text = string.Format( "{0}，优势 {1:#}，确保 {2:#}", airSuperiority, airSuperiority * 1.5, airSuperiority * 3 );
 				TextAirSuperiority.Visible = true;
 
 				TableEnemyMember.SuspendLayout();

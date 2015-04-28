@@ -71,7 +71,7 @@
 			this.QuestView.ContextMenuStrip = this.MenuMain;
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			dataGridViewCellStyle3.Font = Program.Window_Font;
 			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
 			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
@@ -111,7 +111,7 @@
 			this.QuestView_Type.HeaderText = "種";
 			this.QuestView_Type.Name = "QuestView_Type";
 			this.QuestView_Type.ReadOnly = true;
-			this.QuestView_Type.Width = 20;
+			this.QuestView_Type.Width = 30;
 			// 
 			// QuestView_Category
 			// 
@@ -140,7 +140,7 @@
 			// 
 			// MenuMain
 			// 
-            this.MenuMain.Renderer = ToolStripCustomizer.ToolStripRender.Render;
+			ToolStripCustomizer.ToolStripRender.SetRender(this.MenuMain);
 			this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMain_ShowRunningOnly,
             this.toolStripSeparator2,
@@ -283,7 +283,7 @@
 			this.ClientSize = new System.Drawing.Size(300, 200);
 			this.Controls.Add(this.QuestView);
 			this.DoubleBuffered = true;
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormQuest";

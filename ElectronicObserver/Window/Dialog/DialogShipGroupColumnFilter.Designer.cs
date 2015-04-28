@@ -101,7 +101,7 @@
 			this.Controls.Add(this.ButtonOK);
 			this.Controls.Add(this.Description);
 			this.Controls.Add(this.FilterList);
-			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.Font = Program.Window_Font;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "DialogShipGroupColumnFilter";

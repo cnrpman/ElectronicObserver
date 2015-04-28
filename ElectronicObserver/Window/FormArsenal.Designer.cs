@@ -58,6 +58,7 @@
 			// 
 			// MenuMain
 			// 
+            this.MenuMain.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMain_ShowShipName});
 			this.MenuMain.Name = "MenuMain";

@@ -140,6 +140,7 @@
 			// 
 			// MenuMain
 			// 
+            this.MenuMain.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMain_ShowRunningOnly,
             this.toolStripSeparator2,

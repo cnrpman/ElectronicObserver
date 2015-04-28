@@ -50,6 +50,7 @@
 			// 
 			// ContextMenuLog
 			// 
+            this.ContextMenuLog.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.ContextMenuLog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ContextMenuLog_Clear});
 			this.ContextMenuLog.Name = "ContextMenuLog";

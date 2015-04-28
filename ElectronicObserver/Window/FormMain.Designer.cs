@@ -130,6 +130,7 @@
 			// 
 			// StripMenu
 			// 
+            this.StripMenu.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.StripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripMenu_File,
             this.StripMenu_View,

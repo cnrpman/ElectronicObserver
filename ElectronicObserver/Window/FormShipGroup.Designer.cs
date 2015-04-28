@@ -417,6 +417,7 @@
 			// 
 			// MenuMember
 			// 
+            this.MenuMember.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.MenuMember.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuMember_AddToGroup,
             this.MenuMember_CreateGroup,
@@ -511,6 +512,7 @@
 			// 
 			// MenuGroup
 			// 
+            this.MenuGroup.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.MenuGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuGroup_Add,
             this.MenuGroup_Rename,

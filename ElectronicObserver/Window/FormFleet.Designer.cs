@@ -74,6 +74,7 @@
 			// 
 			// ContextMenuFleet
 			// 
+            this.ContextMenuFleet.Renderer = ToolStripCustomizer.ToolStripRender.Render;
 			this.ContextMenuFleet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ContextMenuFleet_CopyFleet,
             this.ContextMenuFleet_Capture,

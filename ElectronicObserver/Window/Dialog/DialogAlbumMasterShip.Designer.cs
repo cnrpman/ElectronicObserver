@@ -1772,7 +1772,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.MinimumSize = new System.Drawing.Size(816, 518);
 			this.Name = "DialogAlbumMasterShip";
-			this.Text = "艦船図鑑";
+			this.Text = "舰船图鉴";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterShip_FormClosed);
 			this.Load += new System.EventHandler(this.DialogAlbumMasterShip_Load);
 			this.menuStrip1.ResumeLayout(false);

@@ -867,7 +867,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.MinimumSize = new System.Drawing.Size(816, 518);
 			this.Name = "DialogAlbumMasterEquipment";
-			this.Text = "装備図鑑";
+			this.Text = "装备图鉴";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterEquipment_FormClosed);
 			this.Load += new System.EventHandler(this.DialogAlbumMasterEquipment_Load);
 			this.menuStrip1.ResumeLayout(false);

@@ -200,7 +200,7 @@
 			this.Name = "DialogShipGroupCSVOutput";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "グループをCSVに出力";
+			this.Text = "输出舰队编成到CSV";
 			this.Load += new System.EventHandler(this.DialogShipGroupCSVOutput_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

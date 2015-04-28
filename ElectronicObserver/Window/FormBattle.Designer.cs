@@ -369,7 +369,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormBattle";
-			this.Text = "戦闘";
+			this.Text = "战斗";
 			this.Load += new System.EventHandler(this.FormBattle_Load);
 			this.TableBottom.ResumeLayout(false);
 			this.TableBottom.PerformLayout();

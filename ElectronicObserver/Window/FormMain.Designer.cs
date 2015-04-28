@@ -747,7 +747,7 @@
 			// StripStatus_Padding
 			// 
 			this.StripStatus_Padding.Name = "StripStatus_Padding";
-			this.StripStatus_Padding.Size = new System.Drawing.Size(481, 18);
+			this.StripStatus_Padding.Size = new System.Drawing.Size(450, 18);
 			this.StripStatus_Padding.Spring = true;
 			// 
 			// StripStatus_Clock

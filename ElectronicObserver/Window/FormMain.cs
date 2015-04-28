@@ -79,7 +79,7 @@ namespace ElectronicObserver.Window {
 			Utility.Logger.Add( 2, SoftwareInformation.SoftwareNameJapanese + " を起動しています…" );
 
 
-			this.Text = SoftwareInformation.VersionJapanese;
+			this.Text = SoftwareInformation.VersionJapanese + " - [魔改]";
 
 			ResourceManager.Instance.Load();
 			RecordManager.Instance.Load();
@@ -197,6 +197,7 @@ namespace ElectronicObserver.Window {
 
 
 			StripStatus_Clock.Text = DateTime.Now.ToString( "HH:mm:ss" );
+			StripStatus_Clock.ToolTipText = DateTime.Now.ToString( "yyyy/MM/dd (ddd)" );
 		}
 
 

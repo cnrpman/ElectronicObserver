@@ -57,7 +57,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormWindowCapture";
-			this.Text = "ウィンドウキャプチャ";
+			this.Text = "窗口捕捉";
 			this.ResumeLayout(false);
 
 		}

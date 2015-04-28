@@ -235,7 +235,7 @@
 			this.Font = Program.Window_Font;
 			this.MainMenuStrip = this.TopMenu;
 			this.Name = "DialogEquipmentList";
-			this.Text = "装備一覧";
+			this.Text = "装备一览";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogEquipmentList_FormClosed);
 			this.Load += new System.EventHandler(this.DialogEquipmentList_Load);
 			((System.ComponentModel.ISupportInitialize)(this.EquipmentView)).EndInit();

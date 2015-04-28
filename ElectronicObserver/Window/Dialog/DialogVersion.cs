@@ -18,6 +18,12 @@ namespace ElectronicObserver.Window.Dialog {
 			TextVersion.Text = string.Format( "{0} (ver. {1} - {2} Release)", SoftwareInformation.VersionJapanese, SoftwareInformation.VersionEnglish, SoftwareInformation.UpdateTime.ToString( "d" ) ); 
 		}
 
+		private void Text__LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
+
+			System.Diagnostics.Process.Start( "https://github.com/tsanie/ElectronicObserver/tree/development" );
+
+		}
+
 		private void TextAuthor_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
 
 			System.Diagnostics.Process.Start( "https://twitter.com/andanteyk" );

@@ -169,7 +169,7 @@
 			this.TextEventKind.Name = "TextEventKind";
 			this.TextEventKind.Size = new System.Drawing.Size(47, 16);
 			this.TextEventKind.TabIndex = 7;
-			this.TextEventKind.Text = "(イベント)";
+			this.TextEventKind.Text = "(活动)";
 			// 
 			// TextEventDetail
 			// 
@@ -179,7 +179,7 @@
 			this.TextEventDetail.Name = "TextEventDetail";
 			this.TextEventDetail.Size = new System.Drawing.Size(71, 16);
 			this.TextEventDetail.TabIndex = 8;
-			this.TextEventDetail.Text = "(イベント詳細)";
+			this.TextEventDetail.Text = "(活动详情)";
 			// 
 			// FormCompass
 			// 
@@ -191,7 +191,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormCompass";
-			this.Text = "羅針盤";
+			this.Text = "罗针盘";
 			this.Load += new System.EventHandler(this.FormCompass_Load);
 			this.BasePanel.ResumeLayout(false);
 			this.BasePanel.PerformLayout();

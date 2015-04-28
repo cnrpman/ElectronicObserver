@@ -131,6 +131,16 @@ namespace ElectronicObserver.Window {
 
 			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
+			//dynamic data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("api_start2.txt")).api_data;
+			//o.APIList["api_start2"].OnResponseReceived(data);
+
+			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("port.txt")).api_data;
+			//o.APIList["api_port/port"].OnResponseReceived(data);
+			
+			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("data.txt")).api_data;
+			//string apiname = "api_req_sortie/battle";
+			//KCDatabase.Instance.Battle.LoadFromResponse(apiname, data);
+			//Updated(apiname, data);
 		}
 
 

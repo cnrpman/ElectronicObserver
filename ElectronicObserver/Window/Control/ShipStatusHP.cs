@@ -280,6 +280,13 @@ namespace ElectronicObserver.Window.Control {
 
 			} else {
 
+				// dangerous
+				if ( Value > 0 && Value <= MaximumValue * 0.25 ) {
+					g.Clear( Color.FromArgb( 248, 152, 125 ) );
+				}
+
+				//
+
 				Size sz_text = TextRenderer.MeasureText( Text, SubFont, maxsize, TextFormatText );
 				Size sz_hpmax = TextRenderer.MeasureText( Math.Max( MaximumValue, MaximumDigit ).ToString(), SubFont, maxsize, TextFormatHP );
 				Size sz_slash = TextRenderer.MeasureText( " / ", SubFont, maxsize, TextFormatHP );

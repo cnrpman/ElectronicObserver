@@ -282,7 +282,7 @@ namespace ElectronicObserver.Window.Control {
 
 				// dangerous
 				if ( Value > 0 && Value <= MaximumValue * 0.25 ) {
-					g.Clear( Color.FromArgb( 248, 152, 125 ) );
+					g.Clear( Color.FromArgb( 240, 128, 128 ) );
 				}
 
 				//

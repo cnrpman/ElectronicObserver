@@ -299,7 +299,7 @@ namespace ElectronicObserver.Observer {
 					if ( filepath.EndsWith( ".swf" ) )
 						oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
 				}
-			} else if ( oSession.PathAndQuery.StartsWith("/kcs") && oSession.responseCode != 200 ) {
+			} else if ( oSession.PathAndQuery.StartsWith( "/kcs" ) && oSession.responseCode != 200 && oSession.responseCode != 304 ) {
 				Utility.ErrorReporter.SendErrorReport( new Exception( oSession.fullUrl ), "返回错误状态码：" + oSession.responseCode, oSession.fullUrl, oSession.GetResponseBodyAsString() );
 			}
 		}

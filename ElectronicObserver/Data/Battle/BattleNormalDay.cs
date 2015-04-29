@@ -8,11 +8,13 @@ namespace ElectronicObserver.Data.Battle {
 
 	public class BattleNormalDay : BattleData {
 
-		public double[] friendDamages = new double[6];
-		public double airDamage = 0;
+		public double[] friendDamages;
+		public double airDamage;
 		
 		public override int[] EmulateBattle() {
 
+			friendDamages = new double[6];
+			airDamage = 0;
             int[] hp = new int[12];
 
 			KCDatabase db = KCDatabase.Instance;

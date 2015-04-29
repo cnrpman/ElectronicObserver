@@ -160,10 +160,10 @@ namespace ElectronicObserver.Window {
 			BaseLayoutPanel.SuspendLayout();
 			TableTop.SuspendLayout();
 			TableBottom.SuspendLayout();
-			TableTop.ColumnStyles[1].Width = 10F;
-			TableBottom.ColumnStyles[1].Width = 10F;
-			AirDamage.Text = string.Empty;
-			AirDamageValue.Text = string.Empty;
+			//TableTop.ColumnStyles[1].Width = 10F;
+			//TableBottom.ColumnStyles[1].Width = 10F;
+			//AirDamage.Text = string.Empty;
+			//AirDamageValue.Text = string.Empty;
 			switch ( apiname ) {
 
 				case "api_req_map/start":
@@ -176,8 +176,8 @@ namespace ElectronicObserver.Window {
 
 				case "api_req_sortie/battle":
 				case "api_req_practice/battle": {
-						TableTop.ColumnStyles[1].Width = 60F;
-						TableBottom.ColumnStyles[1].Width = 60F;
+						//TableTop.ColumnStyles[1].Width = 60F;
+						//TableBottom.ColumnStyles[1].Width = 60F;
 						AirDamage.Text = "航空伤害";
 						int[] hp = bm.BattleDay.EmulateBattle();
                         double[] damages;
@@ -204,22 +204,17 @@ namespace ElectronicObserver.Window {
 
 						double maxdmg = 0;
 						int mvp = 0;
-                        for (int i = 0; i < 6; i++)
-                        {
-                            if (damages[i] > 0)
-                            {
-								if (damages[i] > maxdmg)
-								{
+                        for ( int i = 0; i < 6; i++ ) {
+							if ( damages != null && damages.Length > i && damages[i] > 0 ) {
+								if ( damages[i] > maxdmg ) {
 									maxdmg = damages[i];
 									mvp = i;
 								}
-                                DamageLabels[i].Text = damages[i].ToString();
-                                DamageLabels[i].Visible = true;
-                            }
-                            else
-                            {
-                                DamageLabels[i].Visible = false;
-                            }
+								DamageLabels[i].Text = damages[i].ToString();
+								DamageLabels[i].Visible = true;
+							} else {
+								DamageLabels[i].Visible = false;
+							}
                         }
 						for ( int i = 0; i < 6; i++ ) {
 							DamageLabels[i].ImageIndex = ( i == mvp ) ? (int)ResourceManager.IconContent.ConditionSparkle : (int)ResourceManager.IconContent.ConditionNormal;

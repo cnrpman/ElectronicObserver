@@ -200,7 +200,9 @@ namespace ElectronicObserver.Window {
                                 DamageLabels[i].Visible = false;
                             }
                         }
-						DamageLabels[mvp].ImageIndex = (int)ResourceManager.IconContent.ConditionSparkle;
+						for ( int i = 0; i < 6; i++ ) {
+							DamageLabels[i].ImageIndex = ( i == mvp ) ? (int)ResourceManager.IconContent.ConditionSparkle : (int)ResourceManager.IconContent.ConditionNormal;
+						}
 
                         BaseLayoutPanel.Visible = true;
 					} break;

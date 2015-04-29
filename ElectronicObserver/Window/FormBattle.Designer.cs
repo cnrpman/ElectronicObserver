@@ -29,6 +29,8 @@
 			this.BaseLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.TableTop = new System.Windows.Forms.TableLayoutPanel();
 			this.FormationFriend = new ElectronicObserver.Window.Control.ImageLabel();
+			this.AirDamage = new ElectronicObserver.Window.Control.ImageLabel();
+			this.AirDamageValue = new ElectronicObserver.Window.Control.ImageLabel();
 			this.Formation = new ElectronicObserver.Window.Control.ImageLabel();
 			this.FormationEnemy = new ElectronicObserver.Window.Control.ImageLabel();
 			this.AirStage2Friend = new ElectronicObserver.Window.Control.ImageLabel();
@@ -112,6 +114,8 @@
 			this.TableTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
 			this.TableTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
 			this.TableTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+			this.TableTop.Controls.Add(this.AirDamage, 1, 0);
+			this.TableTop.Controls.Add(this.AirDamageValue, 1, 1);
 			this.TableTop.Controls.Add(this.FormationFriend, 0, 0);
 			this.TableTop.Controls.Add(this.Formation, 2, 0);
 			this.TableTop.Controls.Add(this.FormationEnemy, 3, 0);
@@ -144,6 +148,30 @@
 			this.TableTop.Size = new System.Drawing.Size(312, 84);
 			this.TableTop.TabIndex = 18;
 			this.TableTop.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.TableTop_CellPaint);
+			// 
+			// AirDamage
+			// 
+			this.AirDamage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.AirDamage.BackColor = System.Drawing.Color.Transparent;
+			this.AirDamage.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.AirDamage.Location = new System.Drawing.Point(3, 3);
+			this.AirDamage.Name = "AirDamage";
+			this.AirDamage.Size = new System.Drawing.Size(54, 15);
+			this.AirDamage.TabIndex = 0;
+			this.AirDamage.Text = "航空伤害";
+			this.AirDamage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// AirDamageValue
+			// 
+			this.AirDamageValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.AirDamageValue.BackColor = System.Drawing.Color.Transparent;
+			this.AirDamageValue.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.AirDamageValue.Location = new System.Drawing.Point(3, 3);
+			this.AirDamageValue.Name = "AirDamageValue";
+			this.AirDamageValue.Size = new System.Drawing.Size(54, 15);
+			this.AirDamageValue.TabIndex = 0;
+			this.AirDamageValue.Text = "999";
+			this.AirDamageValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// FormationFriend
 			// 
@@ -394,6 +422,8 @@
 		private Control.ImageLabel SearchingFriend;
 		private Control.ImageLabel FormationEnemy;
 		private Control.ImageLabel FormationFriend;
+		private Control.ImageLabel AirDamage;
+		private Control.ImageLabel AirDamageValue;
 		private Control.ImageLabel Formation;
 		private Control.ImageLabel AirStage2Enemy;
 		private Control.ImageLabel FleetFriend;

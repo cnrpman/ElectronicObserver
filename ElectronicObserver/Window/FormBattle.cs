@@ -131,16 +131,24 @@ namespace ElectronicObserver.Window {
 
 			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
+			//#region - Debug -
+
 			//dynamic data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("api_start2.txt")).api_data;
 			//o.APIList["api_start2"].OnResponseReceived(data);
 
 			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("port.txt")).api_data;
 			//o.APIList["api_port/port"].OnResponseReceived(data);
-			
-			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("data.txt")).api_data;
-			//string apiname = "api_req_sortie/battle";
+
+			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("practice.txt")).api_data;
+			//string apiname = "api_req_practice/battle";
+			//KCDatabase.Instance.Battle.LoadFromResponse(apiname, data);
+
+			//data = Codeplex.Data.DynamicJson.Parse(System.IO.File.OpenRead("practice_midnight.txt")).api_data;
+			//apiname = "api_req_practice/midnight_battle";
 			//KCDatabase.Instance.Battle.LoadFromResponse(apiname, data);
 			//Updated(apiname, data);
+
+			//#endregion
 		}
 
 
@@ -152,6 +160,10 @@ namespace ElectronicObserver.Window {
 			BaseLayoutPanel.SuspendLayout();
 			TableTop.SuspendLayout();
 			TableBottom.SuspendLayout();
+			TableTop.ColumnStyles[1].Width = 10F;
+			TableBottom.ColumnStyles[1].Width = 10F;
+			AirDamage.Text = string.Empty;
+			AirDamageValue.Text = string.Empty;
 			switch ( apiname ) {
 
 				case "api_req_map/start":
@@ -164,16 +176,25 @@ namespace ElectronicObserver.Window {
 
 				case "api_req_sortie/battle":
 				case "api_req_practice/battle": {
+						TableTop.ColumnStyles[1].Width = 60F;
+						TableBottom.ColumnStyles[1].Width = 60F;
+						AirDamage.Text = "航空伤害";
 						int[] hp = bm.BattleDay.EmulateBattle();
                         double[] damages;
-                        if (bm.BattleDay is BattleNormalDay)
-                        {
-                            damages = ((BattleNormalDay)bm.BattleDay).friendDamages;
-                        }
-                        else
-                        {
-                            damages = new double[6];
-                        }
+						double airdamage;
+						if ( bm.BattleDay is BattleNormalDay ) {
+							var dt = ((BattleNormalDay)bm.BattleDay);
+							damages = dt.friendDamages;
+							airdamage = dt.airDamage;
+						} else if ( bm.BattleDay is BattlePracticeDay ) {
+							var dt = ((BattlePracticeDay)bm.BattleDay);
+							damages = dt.friendDamages;
+							airdamage = dt.airDamage;
+						} else {
+							damages = new double[6];
+							airdamage = 0;
+						}
+						AirDamageValue.Text = airdamage.ToString("0.#");
 
 						SetFormation( bm.BattleDay );
 						SetSearchingResult( bm.BattleDay );

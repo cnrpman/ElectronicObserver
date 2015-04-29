@@ -8,7 +8,8 @@ namespace ElectronicObserver.Data.Battle {
 
 	public class BattleNormalDay : BattleData {
 
-        public double[] friendDamages = new double[6];
+		public double[] friendDamages = new double[6];
+		public double airDamage = 0;
 		
 		public override int[] EmulateBattle() {
 
@@ -51,7 +52,9 @@ namespace ElectronicObserver.Data.Battle {
 			if ( (int)RawData.api_stage_flag[2] != 0 ) {
 				for ( int i = 0; i < 6; i++ ) {
 					DealDamageFriend( i, (int)RawData.api_kouku.api_stage3.api_fdam[i + 1] );
-					DealDamageEnemy( i, (int)RawData.api_kouku.api_stage3.api_edam[i + 1] );
+					double damage = RawData.api_kouku.api_stage3.api_edam[i + 1];
+					DealDamageEnemy( i, (int)damage );
+					airDamage += damage;
 				}
 			}
 
@@ -77,7 +80,7 @@ namespace ElectronicObserver.Data.Battle {
 				for ( int i = 0; i < 6; i++ ) {
 					DealDamageFriend( i, (int)RawData.api_opening_atack.api_fdam[i + 1] );
 					DealDamageEnemy( i, (int)RawData.api_opening_atack.api_edam[i + 1] );
-                    friendDamages[i] += RawData.api_opening_atack.api_fydam[i + 1];
+					friendDamages[i] += (int)RawData.api_opening_atack.api_fydam[i + 1];
 				}
 			}
 
@@ -95,17 +98,14 @@ namespace ElectronicObserver.Data.Battle {
 						damageList[j] = 0;
 					}
 
-                    int source = (int)hougeki.api_at_list[i];
+					int source = (int)hougeki.api_at_list[i];
 					int lenj = ( (int[])hougeki.api_df_list[i] ).Length;
-                    for (int j = 0; j < lenj; j++)
-                    {
+                    for ( int j = 0; j < lenj; j++ ) {
                         int target = (int)hougeki.api_df_list[i][j];
-                        if (target != -1)
-                        {
+                        if ( target != -1 ) {
                             double dmg = hougeki.api_damage[i][j];
                             damageList[target - 1] += (int)dmg;
-                            if (source <= 6)
-                            {
+                            if ( source <= 6 ) {
                                 friendDamages[source - 1] += dmg;
                             }
                         }
@@ -131,17 +131,14 @@ namespace ElectronicObserver.Data.Battle {
 						damageList[j] = 0;
 					}
 
-                    int source = (int)hougeki.api_at_list[i];
+					int source = (int)hougeki.api_at_list[i];
 					int lenj = ( (int[])hougeki.api_df_list[i] ).Length;
-                    for (int j = 0; j < lenj; j++)
-                    {
+                    for ( int j = 0; j < lenj; j++ ) {
                         int target = (int)hougeki.api_df_list[i][j];
-                        if (target != -1)
-                        {
+                        if ( target != -1 ) {
                             double dmg = hougeki.api_damage[i][j];
                             damageList[target - 1] += (int)dmg;
-                            if (source <= 6)
-                            {
+                            if ( source <= 6 ) {
                                 friendDamages[source - 1] += dmg;
                             }
                         }
@@ -152,11 +149,6 @@ namespace ElectronicObserver.Data.Battle {
 						DealDamageEnemy( j, damageList[j + 6] );
 					}
 				}
-
-                for (int i = 0; i < 6; i++)
-                {
-                    friendDamages[i] += damageList[i];
-                }
 			}
 
 
@@ -165,7 +157,7 @@ namespace ElectronicObserver.Data.Battle {
 				for ( int i = 0; i < 6; i++ ) {
 					DealDamageFriend( i, (int)RawData.api_raigeki.api_fdam[i + 1] );
 					DealDamageEnemy( i, (int)RawData.api_raigeki.api_edam[i + 1] );
-                    friendDamages[i] += RawData.api_raigeki.api_fydam[i + 1];
+					friendDamages[i] += (int)RawData.api_raigeki.api_fydam[i + 1];
 				}
 			}
 

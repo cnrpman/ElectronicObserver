@@ -106,7 +106,7 @@
 			this.ShipView.AllowUserToAddRows = false;
 			this.ShipView.AllowUserToDeleteRows = false;
 			this.ShipView.AllowUserToResizeRows = false;
-			this.ShipView.BackgroundColor = Utility.Configuration.Config.UI.BackColor.ColorData;
+			this.ShipView.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.ShipView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.ShipView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ShipView_ID,

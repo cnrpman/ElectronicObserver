@@ -513,6 +513,8 @@ namespace ElectronicObserver.Window {
 		private TableMemberControl[] ControlMember;
 
 
+		private Pen LinePen = Pens.Silver;
+
 
 		public FormFleet( FormMain parent, int fleetID ) {
 			InitializeComponent();
@@ -736,6 +738,8 @@ namespace ElectronicObserver.Window {
 			MainFont = Font = c.UI.MainFont;
 			SubFont = c.UI.SubFont;
 
+			LinePen = new Pen( c.UI.HighlightColor.ColorData );
+
 			AutoScroll = ContextMenuFleet_IsScrollable.Checked = c.FormFleet.IsScrollable;
 			ContextMenuFleet_FixShipNameWidth.Checked = c.FormFleet.FixShipNameWidth;
 
@@ -780,7 +784,7 @@ namespace ElectronicObserver.Window {
 
 
 		private void TableMember_CellPaint( object sender, TableLayoutCellPaintEventArgs e ) {
-			e.Graphics.DrawLine( Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
+			e.Graphics.DrawLine( LinePen, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
 		}
 
 

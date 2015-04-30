@@ -25,7 +25,7 @@ namespace ElectronicObserver.Window {
 		public Font MainFont { get; set; }
 		public Font SubFont { get; set; }
 
-
+		private Pen LinePen = Pens.Silver;
 
 		public FormBattle( FormMain parent ) {
 			InitializeComponent();
@@ -1178,18 +1178,20 @@ namespace ElectronicObserver.Window {
 			MainFont = TableTop.Font = TableBottom.Font = Font = Utility.Configuration.Config.UI.MainFont;
 			SubFont = Utility.Configuration.Config.UI.SubFont;
 
+			LinePen = new Pen( Utility.Configuration.Config.UI.LineColor.ColorData );
+
 		}
 
 
 
 		private void TableTop_CellPaint( object sender, TableLayoutCellPaintEventArgs e ) {
 			if ( e.Row == 1 || e.Row == 3 )
-				e.Graphics.DrawLine( Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
+				e.Graphics.DrawLine( LinePen, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
 		}
 
 		private void TableBottom_CellPaint( object sender, TableLayoutCellPaintEventArgs e ) {
 			if ( e.Row == 7 )
-				e.Graphics.DrawLine( Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
+				e.Graphics.DrawLine( LinePen, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
 		}
 
 

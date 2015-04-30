@@ -165,7 +165,7 @@ namespace ElectronicObserver.Window {
 			ShipCount.Text = string.Format( "{0}/{1}", db.Ships.Count, db.Admiral.MaxShipCount );
 			if ( db.Ships.Count > db.Admiral.MaxShipCount - 5 ) {
 				ShipCount.BackColor = Color.LightCoral;
-				ShipCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+				ShipCount.ForeColor = Utility.Configuration.Config.UI.HighlightForeColor;
 			} else {
 				ShipCount.BackColor = Color.Transparent;
 				ShipCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
@@ -174,7 +174,7 @@ namespace ElectronicObserver.Window {
 			EquipmentCount.Text = string.Format( "{0}/{1}", db.Equipments.Count, db.Admiral.MaxEquipmentCount );
 			if ( db.Equipments.Count > db.Admiral.MaxEquipmentCount - 20 ) {
 				EquipmentCount.BackColor = Color.LightCoral;
-				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.HighlightForeColor;
 			} else {
 				EquipmentCount.BackColor = Color.Transparent;
 				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
@@ -196,7 +196,7 @@ namespace ElectronicObserver.Window {
 			{
 				Color overcolor = Color.Moccasin;
 				Color fore = Utility.Configuration.Config.UI.ForeColor;
-				Color back = Utility.Configuration.Config.UI.BackColor;
+				Color back = Utility.Configuration.Config.UI.HighlightForeColor;
 				Fuel.Text = db.Material.Fuel.ToString();
 				Fuel.BackColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
 				Fuel.ForeColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? fore : back;
@@ -233,7 +233,7 @@ namespace ElectronicObserver.Window {
 			if ( db.Ships.Count >= db.Admiral.MaxShipCount ) {
 				if ( DateTime.Now.Second % 2 == 0 ) {
 					ShipCount.BackColor = Color.LightCoral;
-					ShipCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+					ShipCount.ForeColor = Utility.Configuration.Config.UI.HighlightForeColor;
 				} else {
 					ShipCount.BackColor = Color.Transparent;
 					ShipCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
@@ -243,7 +243,7 @@ namespace ElectronicObserver.Window {
 			if ( db.Equipments.Count >= db.Admiral.MaxEquipmentCount ) {
 				if ( DateTime.Now.Second % 2 == 0 ) {
 					EquipmentCount.BackColor = Color.LightCoral;
-					EquipmentCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+					EquipmentCount.ForeColor = Utility.Configuration.Config.UI.HighlightForeColor;
 				} else {
 					EquipmentCount.BackColor = Color.Transparent;
 					EquipmentCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;

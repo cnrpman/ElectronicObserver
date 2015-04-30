@@ -102,6 +102,8 @@ namespace ElectronicObserver.Window {
 		private List<TableFleetControl> ControlFleet;
 		private ImageLabel CombinedTag;
 
+		private Pen LinePen = Pens.Silver;
+
 
 		public FormFleetOverview( FormMain parent ) {
 			InitializeComponent();
@@ -189,6 +191,7 @@ namespace ElectronicObserver.Window {
 
 		void ConfigurationChanged() {
 			Font = Utility.Configuration.Config.UI.MainFont;
+			LinePen = new Pen( Utility.Configuration.Config.UI.LineColor.ColorData );
 		}
 
 
@@ -220,10 +223,8 @@ namespace ElectronicObserver.Window {
 			}
 		}
 
-
-
 		private void TableFleet_CellPaint( object sender, TableLayoutCellPaintEventArgs e ) {
-			e.Graphics.DrawLine( Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
+			e.Graphics.DrawLine( LinePen, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
 
 		}
 

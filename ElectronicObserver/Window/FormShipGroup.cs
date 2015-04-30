@@ -22,6 +22,13 @@ namespace ElectronicObserver.Window {
 	public partial class FormShipGroup : DockContent {
 
 
+		/// <summary>タブ背景色(アクティブ)</summary>
+		private readonly Color TabActiveColor = Color.FromArgb( 0xFF, 0xFF, 0xCC );
+
+		/// <summary>タブ背景色(非アクティブ)</summary>
+		private readonly Color TabInactiveColor = SystemColors.Control;
+
+
 
 		// セル背景色
 		private readonly Color CellColorRed = Color.FromArgb( 0xFF, 0xBB, 0xBB );
@@ -55,11 +62,11 @@ namespace ElectronicObserver.Window {
 
 			CSDefaultLeft = new DataGridViewCellStyle();
 			CSDefaultLeft.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			CSDefaultLeft.BackColor = Utility.Configuration.Config.UI.BackColor;
+			CSDefaultLeft.BackColor = SystemColors.Control;
 			CSDefaultLeft.Font = Font;
-			CSDefaultLeft.ForeColor = Utility.Configuration.Config.UI.ForeColor;
-			CSDefaultLeft.SelectionBackColor = Utility.Configuration.Config.UI.HighlightColor;
-			CSDefaultLeft.SelectionForeColor = Utility.Configuration.Config.UI.ForeColor;
+			CSDefaultLeft.ForeColor = SystemColors.ControlText;
+			CSDefaultLeft.SelectionBackColor = Color.FromArgb( 0xFF, 0xFF, 0xCC );
+			CSDefaultLeft.SelectionForeColor = SystemColors.ControlText;
 			CSDefaultLeft.WrapMode = DataGridViewTriState.False;
 
 			CSDefaultCenter = new DataGridViewCellStyle( CSDefaultLeft );
@@ -162,8 +169,6 @@ namespace ElectronicObserver.Window {
 
 			ShipView.Font = StatusBar.Font = Font = config.UI.MainFont;
 
-			#region - Cell Styles -
-
 			CSDefaultLeft.Font =
 			CSDefaultCenter.Font =
 			CSDefaultRight.Font =
@@ -176,70 +181,12 @@ namespace ElectronicObserver.Window {
 			CSIsLocked.Font =
 				config.UI.MainFont;
 
-			CSDefaultLeft.ForeColor =
-			CSDefaultCenter.ForeColor =
-			CSDefaultRight.ForeColor =
-			CSRedRight.ForeColor =
-			CSOrangeRight.ForeColor =
-			CSYellowRight.ForeColor =
-			CSGreenRight.ForeColor =
-			CSGrayRight.ForeColor =
-			CSCherryRight.ForeColor =
-			CSIsLocked.ForeColor =
-				config.UI.ForeColor;
-
-			CSDefaultLeft.SelectionForeColor =
-			CSDefaultCenter.SelectionForeColor =
-			CSDefaultRight.SelectionForeColor =
-			CSRedRight.SelectionForeColor =
-			CSOrangeRight.SelectionForeColor =
-			CSYellowRight.SelectionForeColor =
-			CSGreenRight.SelectionForeColor =
-			CSGrayRight.SelectionForeColor =
-			CSCherryRight.SelectionForeColor =
-			CSIsLocked.SelectionForeColor =
-				config.UI.HighlightForeColor;
-
-			CSDefaultLeft.BackColor =
-			CSDefaultCenter.BackColor =
-			CSDefaultRight.BackColor =
-			CSRedRight.BackColor =
-			CSOrangeRight.BackColor =
-			CSYellowRight.BackColor =
-			CSGreenRight.BackColor =
-			CSGrayRight.BackColor =
-			CSCherryRight.BackColor =
-			CSIsLocked.BackColor =
-				config.UI.BackColor;
-
-			CSDefaultLeft.SelectionBackColor =
-			CSDefaultCenter.SelectionBackColor =
-			CSDefaultRight.SelectionBackColor =
-			CSRedRight.SelectionBackColor =
-			CSOrangeRight.SelectionBackColor =
-			CSYellowRight.SelectionBackColor =
-			CSGreenRight.SelectionBackColor =
-			CSGrayRight.SelectionBackColor =
-			CSCherryRight.SelectionBackColor =
-			CSIsLocked.SelectionBackColor =
-				config.UI.HighlightColor;
-
-			#endregion
-
 			splitContainer1.SplitterDistance = config.FormShipGroup.SplitterDistance;
 			MenuGroup_AutoUpdate.Checked = config.FormShipGroup.AutoUpdate;
 			MenuGroup_ShowStatusBar.Checked = config.FormShipGroup.ShowStatusBar;
 
-			ShipView.BackgroundColor = config.UI.BackColor;
-			foreach ( System.Windows.Forms.Control c in TabPanel.Controls ) {
-				if ( c == SelectedTab ) {
-					c.BackColor = config.UI.HighlightColor;
-				} else {
-					c.BackColor = config.UI.ButtonBackColor;
-				}
-			}
-
 		}
+
 
 
 		/// <summary>
@@ -251,7 +198,7 @@ namespace ElectronicObserver.Window {
 			label.Text = KCDatabase.Instance.ShipGroup[id] != null ? KCDatabase.Instance.ShipGroup[id].Name : "全所属艦";
 			label.Anchor = AnchorStyles.Left;
 			label.Font = ShipView.Font;
-			label.BackColor = Utility.Configuration.Config.UI.ButtonBackColor;
+			label.BackColor = TabInactiveColor;
 			label.BorderStyle = BorderStyle.FixedSingle;
 			label.Padding = new Padding( 4, 4, 7, 7 );
 			label.Margin = new Padding( 0, 0, 0, 0 );
@@ -510,10 +457,10 @@ namespace ElectronicObserver.Window {
 			}
 
 			if ( SelectedTab != null )
-				SelectedTab.BackColor = Utility.Configuration.Config.UI.ButtonBackColor;
+				SelectedTab.BackColor = TabInactiveColor;
 			SelectedTab = target;
 			BuildShipView( SelectedTab );
-			SelectedTab.BackColor = Utility.Configuration.Config.UI.HighlightColor;
+			SelectedTab.BackColor = TabActiveColor;
 
 		}
 

@@ -257,6 +257,8 @@ namespace ElectronicObserver.Window {
 		public Color MainFontColor { get; set; }
 		public Color SubFontColor { get; set; }
 
+		private Pen LinePen = Pens.Silver;
+
 
 		private TableEnemyMemberControl[] ControlMember;
 
@@ -601,6 +603,7 @@ namespace ElectronicObserver.Window {
 			MainFontColor = Utility.Configuration.Config.UI.ForeColor;
 			SubFontColor = Utility.Configuration.Config.UI.SubForeColor;
 
+			LinePen = new Pen( Utility.Configuration.Config.UI.LineColor.ColorData );
 
 			if ( ControlMember != null ) {
 				bool flag = Utility.Configuration.Config.FormFleet.ShowAircraft;
@@ -617,7 +620,7 @@ namespace ElectronicObserver.Window {
 		}
 
 		private void TableEnemyMember_CellPaint( object sender, TableLayoutCellPaintEventArgs e ) {
-			e.Graphics.DrawLine( Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
+			e.Graphics.DrawLine( LinePen, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
 		}
 
 	}

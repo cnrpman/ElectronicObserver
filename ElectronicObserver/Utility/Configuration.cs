@@ -152,6 +152,7 @@ namespace ElectronicObserver.Utility {
 				public SerializableColor SubForeColor { get; set; }
 				public SerializableColor HighlightForeColor { get; set; }
 				public SerializableColor HighlightColor { get; set; }
+				public SerializableColor LineColor { get; set; }
 				public SerializableColor ButtonBackColor { get; set; }
 				public SerializableColor FailedColor { get; set; }
 				public SerializableColor EliteColor { get; set; }
@@ -170,6 +171,7 @@ namespace ElectronicObserver.Utility {
 					SubForeColor = new SerializableColor( Color.FromArgb( 0x88, 0x88, 0x88 ) );
 					HighlightColor = new SerializableColor( Color.FromArgb( 255, 0xFF, 0xFF, 0xCC ) );
 					HighlightForeColor = new SerializableColor( SystemColors.ControlText );
+					LineColor = new SerializableColor( SystemColors.ControlDark );
 					ButtonBackColor = new SerializableColor( SystemColors.Control );
 					FailedColor = new SerializableColor( Color.Red );
 					EliteColor = new SerializableColor( Color.FromArgb( 0xFF, 0x00, 0x00 ) );

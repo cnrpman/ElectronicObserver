@@ -83,6 +83,7 @@ namespace ElectronicObserver.Window {
 			}
 
 			QuestView.DefaultCellStyle = CSDefaultCenter;
+			QuestView.GridColor = Utility.Configuration.Config.UI.LineColor;
 			QuestView_Category.DefaultCellStyle = CSCategories[8 - 1];
 			QuestView_Name.DefaultCellStyle = CSDefaultLeft;
 			QuestView_Progress.DefaultCellStyle = CSDefaultLeft;
@@ -141,6 +142,7 @@ namespace ElectronicObserver.Window {
 			var c = Utility.Configuration.Config;
 
 			QuestView.BackgroundColor = c.UI.BackColor;
+			QuestView.GridColor = c.UI.LineColor;
 
 			if ( CSDefaultCenter != null && CSDefaultLeft != null ) {
 				CSDefaultCenter.BackColor =

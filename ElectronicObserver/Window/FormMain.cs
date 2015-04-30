@@ -124,8 +124,7 @@ namespace ElectronicObserver.Window {
 
 			ConfigurationChanged();		//設定から初期化
 
-            // in this branch, we wont need update
-			//SoftwareInformation.CheckUpdate();
+			SoftwareInformation.CheckUpdate();
 
 			// デバッグ: 開始時にAPIリストを読み込む
 			if ( Configuration.Config.Debug.LoadAPIListOnLoad ) {

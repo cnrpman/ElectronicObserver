@@ -738,7 +738,7 @@ namespace ElectronicObserver.Window {
 			MainFont = Font = c.UI.MainFont;
 			SubFont = c.UI.SubFont;
 
-			LinePen = new Pen( c.UI.HighlightColor.ColorData );
+			LinePen = new Pen( c.UI.LineColor.ColorData );
 
 			AutoScroll = ContextMenuFleet_IsScrollable.Checked = c.FormFleet.IsScrollable;
 			ContextMenuFleet_FixShipNameWidth.Checked = c.FormFleet.FixShipNameWidth;

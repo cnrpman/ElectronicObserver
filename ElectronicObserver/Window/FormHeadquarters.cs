@@ -172,7 +172,7 @@ namespace ElectronicObserver.Window {
 			}
 
 			EquipmentCount.Text = string.Format( "{0}/{1}", db.Equipments.Count, db.Admiral.MaxEquipmentCount );
-			if ( db.Equipments.Count > db.Admiral.MaxEquipmentCount - 20 ) {
+			if ( db.Equipments.Count > db.Admiral.MaxEquipmentCount + 3 - 20 ) {
 				EquipmentCount.BackColor = Color.LightCoral;
 				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.HighlightForeColor;
 			} else {

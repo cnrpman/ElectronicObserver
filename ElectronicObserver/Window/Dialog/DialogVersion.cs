@@ -15,7 +15,7 @@ namespace ElectronicObserver.Window.Dialog {
 		public DialogVersion() {
 			InitializeComponent();
 
-			this.Text = "魔改版本 - 430.2113";
+			this.Text = "魔改版本 - 501.0023";
 			TextVersion.Text = string.Format( "{0} (ver. {1} - {2} Release)", SoftwareInformation.VersionJapanese, SoftwareInformation.VersionEnglish, SoftwareInformation.UpdateTime.ToString( "d" ) ); 
 		}
 

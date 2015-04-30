@@ -34,9 +34,9 @@ namespace ElectronicObserver.Window {
 			CSDefaultLeft = new DataGridViewCellStyle();
 			CSDefaultLeft.Alignment = DataGridViewContentAlignment.MiddleLeft;
 			CSDefaultLeft.BackColor =
-			CSDefaultLeft.SelectionBackColor = SystemColors.Control;
-			CSDefaultLeft.ForeColor = SystemColors.ControlText;
-			CSDefaultLeft.SelectionForeColor = SystemColors.ControlText;
+			CSDefaultLeft.SelectionBackColor = Utility.Configuration.Config.UI.BackColor;
+			CSDefaultLeft.ForeColor =
+			CSDefaultLeft.SelectionForeColor = Utility.Configuration.Config.UI.ForeColor;
 			CSDefaultLeft.WrapMode = DataGridViewTriState.False;
 
 			CSDefaultCenter = new DataGridViewCellStyle( CSDefaultLeft );
@@ -77,6 +77,9 @@ namespace ElectronicObserver.Window {
 
 				CSCategories[i].BackColor =
 				CSCategories[i].SelectionBackColor = c;
+				CSCategories[i].ForeColor =
+				CSCategories[i].SelectionForeColor =
+					SystemColors.ControlText;
 			}
 
 			QuestView.DefaultCellStyle = CSDefaultCenter;
@@ -111,12 +114,46 @@ namespace ElectronicObserver.Window {
 
 			Icon = ResourceManager.ImageToIcon( ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormQuest] );
 
+			/*/
+			#region - Debug -
+
+			APIObserver o = APIObserver.Instance;
+			dynamic data;
+
+			//data = Codeplex.Data.DynamicJson.Parse( System.IO.File.OpenRead( "api_start2.txt" ) ).api_data;
+			//o.APIList["api_start2"].OnResponseReceived( data );
+
+			//data = Codeplex.Data.DynamicJson.Parse( System.IO.File.OpenRead( "port.txt" ) ).api_data;
+			//o.APIList["api_port/port"].OnResponseReceived( data );
+
+			data = Codeplex.Data.DynamicJson.Parse( System.IO.File.OpenRead( "questlist.txt" ) ).api_data;
+			o.APIList["api_get_member/questlist"].OnResponseReceived( data );
+
+			Updated();
+
+			#endregion
+			//*/
 		}
 
 
 		void ConfigurationChanged() {
 
 			var c = Utility.Configuration.Config;
+
+			QuestView.BackgroundColor = c.UI.BackColor;
+
+			if ( CSDefaultCenter != null && CSDefaultLeft != null ) {
+				CSDefaultCenter.BackColor =
+				CSDefaultCenter.SelectionBackColor =
+				CSDefaultLeft.BackColor =
+				CSDefaultLeft.SelectionBackColor =
+					c.UI.BackColor;
+				CSDefaultCenter.ForeColor =
+				CSDefaultCenter.SelectionForeColor =
+				CSDefaultLeft.ForeColor =
+				CSDefaultLeft.SelectionForeColor =
+					c.UI.ForeColor;
+			}
 
 			QuestView.Font = Font = c.UI.MainFont;
 

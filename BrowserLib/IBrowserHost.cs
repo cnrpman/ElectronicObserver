@@ -145,5 +145,11 @@ namespace BrowserLib {
 		[DataMember]
 		public string EmbedHtml { get; set; }
 
+		/// <summary>
+		/// 主题ID
+		/// </summary>
+		[DataMember]
+		public int ThemeID { get; set; }
+
 	}
 }

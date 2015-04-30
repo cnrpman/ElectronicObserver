@@ -32,7 +32,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.TextInformation.AutoWordSelection = true;
-			this.TextInformation.BackColor = System.Drawing.SystemColors.Control;
+			this.TextInformation.BackColor = Utility.Configuration.Config.UI.BackColor.ColorData;
 			this.TextInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TextInformation.Location = new System.Drawing.Point(3, 3);
 			this.TextInformation.Name = "TextInformation";

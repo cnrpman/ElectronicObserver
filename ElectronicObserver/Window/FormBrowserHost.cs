@@ -181,6 +181,7 @@ namespace ElectronicObserver.Window {
 				config.IsToolMenuVisible = c.IsToolMenuVisible;
 				config.ConfirmAtRefresh = c.ConfirmAtRefresh;
 				config.EmbedHtml = c.EmbedHtml;
+				config.ThemeID = Utility.Configuration.Config.UI.ThemeID;
 
 				return config;
 			}

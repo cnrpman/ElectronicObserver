@@ -15,6 +15,9 @@ namespace ElectronicObserver {
 		/// </summary>
 		[STAThread]
 		static void Main() {
+			Utility.Configuration.Instance.Load();
+			ToolStripCustomizer.ToolStripRender.RendererTheme = (ToolStripCustomizer.ToolStripRenderTheme)Utility.Configuration.Config.UI.ThemeID;
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault( false );
 			Application.Run( new FormMain() );

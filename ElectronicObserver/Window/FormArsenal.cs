@@ -145,6 +145,7 @@ namespace ElectronicObserver.Window {
 
 		public FormArsenal( FormMain parent ) {
 			InitializeComponent();
+			this.ForeColor = Utility.Configuration.Config.UI.ForeColor;
 
 			Utility.SystemEvents.UpdateTimerTick += UpdateTimerTick;
 
@@ -245,6 +246,14 @@ namespace ElectronicObserver.Window {
 			Font = Utility.Configuration.Config.UI.MainFont;
 			MenuMain_ShowShipName.Checked = Utility.Configuration.Config.FormArsenal.ShowShipName;
 
+			if ( ControlArsenal != null ) {
+				for ( int i = 0; i < ControlArsenal.Length; i++ ) {
+					if ( ControlArsenal[i] != null && ControlArsenal[i].ShipName != null && ControlArsenal[i].CompletionTime != null ) {
+						ControlArsenal[i].ShipName.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+						ControlArsenal[i].CompletionTime.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+					}
+				}
+			}
 		}
 
 

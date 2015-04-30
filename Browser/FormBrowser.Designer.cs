@@ -113,7 +113,6 @@
 			// 
 			// ContextMenuTool
 			// 
-			ToolStripCustomizer.ToolStripRender.SetRender(this.ContextMenuTool);
 			this.ContextMenuTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ContextMenuTool_ShowToolMenu});
 			this.ContextMenuTool.Name = "ContextMenuTool";
@@ -129,7 +128,6 @@
 			// 
 			// ToolMenu
 			// 
-			ToolStripCustomizer.ToolStripRender.SetRender(this.ToolMenu);
 			this.ToolMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolMenu_ScreenShot,
             this.toolStripSeparator1,

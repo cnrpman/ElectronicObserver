@@ -389,7 +389,7 @@ namespace ElectronicObserver.Window {
 					if ( isEscaped ) {
 						HP.BackColor = Color.Silver;
 					} else {
-						HP.BackColor = SystemColors.Control;
+						HP.BackColor = Utility.Configuration.Config.UI.BackColor;
 					}
 					{
 						StringBuilder sb = new StringBuilder();
@@ -522,8 +522,8 @@ namespace ElectronicObserver.Window {
 
 			ConfigurationChanged();
 
-			MainFontColor = Color.FromArgb( 0x00, 0x00, 0x00 );
-			SubFontColor = Color.FromArgb( 0x88, 0x88, 0x88 );
+			MainFontColor = Utility.Configuration.Config.UI.ForeColor;
+			SubFontColor = Utility.Configuration.Config.UI.SubForeColor;
 
 
 			//ui init

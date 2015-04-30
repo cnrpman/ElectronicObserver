@@ -203,6 +203,17 @@ namespace ElectronicObserver.Window {
 		void ConfigurationChanged() {
 
 			Font = Utility.Configuration.Config.UI.MainFont;
+
+			ForeColor = Utility.Configuration.Config.UI.ForeColor;
+
+			if ( ControlDock != null ) {
+				for ( int i = 0; i < ControlDock.Length; i++ ) {
+					if ( ControlDock[i].RepairTime != null && ControlDock[i].ShipName != null ) {
+						ControlDock[i].ShipName.ForeColor = ForeColor;
+						ControlDock[i].RepairTime.ForeColor = ForeColor;
+					}
+				}
+			}
 		}
 
 

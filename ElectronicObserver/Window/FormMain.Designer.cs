@@ -729,6 +729,7 @@
 			// 
 			// StripStatus
 			// 
+			ToolStripCustomizer.ToolStripRender.SetRender(this.StripStatus);
 			this.StripStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripStatus_Information,
             this.StripStatus_Padding,
@@ -774,7 +775,12 @@
 			this.MainDockPanel.Name = "MainDockPanel";
 			this.MainDockPanel.ShowDocumentIcon = true;
 			this.MainDockPanel.Size = new System.Drawing.Size(640, 431);
-			this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012LightTheme();
+			if (ToolStripCustomizer.ToolStripRender.RendererTheme == ToolStripCustomizer.ToolStripRenderTheme.Dark)
+			{
+				this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012DarkTheme();
+			} else {
+				this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012LightTheme();
+			}
 			this.MainDockPanel.TabIndex = 0;
 			// 
 			// FormMain

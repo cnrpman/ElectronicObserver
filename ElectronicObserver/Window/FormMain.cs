@@ -56,12 +56,15 @@ namespace ElectronicObserver.Window {
 
 
 		public FormMain() {
+			this.BackColor = Utility.Configuration.Config.UI.BackColor.ColorData;
+			this.ForeColor = Utility.Configuration.Config.UI.ForeColor.ColorData;
+
 			InitializeComponent();
 		}
 
 		private async void FormMain_Load( object sender, EventArgs e ) {
 
-			Utility.Configuration.Instance.Load();
+			//Utility.Configuration.Instance.Load();
 
 
 			Utility.Logger.Instance.LogAdded += new Utility.LogAddedEventHandler( ( Utility.Logger.LogData data ) => {
@@ -162,6 +165,11 @@ namespace ElectronicObserver.Window {
 			MainDockPanel.Skin.AutoHideStripSkin.TextFont = Font;
 			MainDockPanel.Skin.DockPaneStripSkin.TextFont = Font;
 
+			// color theme
+			foreach ( var f in SubForms ) {
+				f.BackColor = this.BackColor;
+				f.ForeColor = this.ForeColor;
+			}
 		}
 
 

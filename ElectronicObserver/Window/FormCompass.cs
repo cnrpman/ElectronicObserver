@@ -103,7 +103,7 @@ namespace ElectronicObserver.Window {
 				if ( shipID == -1 ) {
 					//なし
 					ShipName.Text = "-";
-					ShipName.ForeColor = Color.FromArgb( 0x00, 0x00, 0x00 );
+					ShipName.ForeColor = Utility.Configuration.Config.UI.ForeColor;
 					Equipments.Visible = false;
 					ToolTipInfo.SetToolTip( ShipName, null );
 					ToolTipInfo.SetToolTip( Equipments, null );
@@ -117,13 +117,13 @@ namespace ElectronicObserver.Window {
 					switch ( ship.AbyssalShipClass ) {
 						case 0:
 						case 1:		//normal
-							ShipName.ForeColor = Color.FromArgb( 0x00, 0x00, 0x00 ); break;
+							ShipName.ForeColor = Utility.Configuration.Config.UI.ForeColor; break;
 						case 2:		//elite
-							ShipName.ForeColor = Color.FromArgb( 0xFF, 0x00, 0x00 ); break;
+							ShipName.ForeColor = Utility.Configuration.Config.UI.EliteColor; break;
 						case 3:		//flagship
-							ShipName.ForeColor = Color.FromArgb( 0xFF, 0x88, 0x00 ); break;
+							ShipName.ForeColor = Utility.Configuration.Config.UI.FlagshipColor; break;
 						case 4:		//latemodel
-							ShipName.ForeColor = Color.FromArgb( 0x00, 0x88, 0xFF ); break;
+							ShipName.ForeColor = Utility.Configuration.Config.UI.LateModelColor; break;
 					}
 					ToolTipInfo.SetToolTip( ShipName, GetShipString( shipID, slot ) );
 
@@ -268,9 +268,6 @@ namespace ElectronicObserver.Window {
 
 			ConfigurationChanged();
 
-			MainFontColor = Color.FromArgb( 0x00, 0x00, 0x00 );
-			SubFontColor = Color.FromArgb( 0x88, 0x88, 0x88 );
-
 
 			ControlHelper.SetDoubleBuffered( BasePanel );
 			ControlHelper.SetDoubleBuffered( TableEnemyFleet );
@@ -338,7 +335,7 @@ namespace ElectronicObserver.Window {
 					case 0:
 					case 1:
 					default:	//昼夜戦・その他
-						return SystemColors.ControlText;
+						return Utility.Configuration.Config.UI.ForeColor;
 					case 2:
 					case 3:		//夜戦・夜昼戦
 						return Color.Navy;
@@ -600,6 +597,9 @@ namespace ElectronicObserver.Window {
 
 			Font = PanelEnemyFleet.Font = MainFont = Utility.Configuration.Config.UI.MainFont;
 			SubFont = Utility.Configuration.Config.UI.SubFont;
+
+			MainFontColor = Utility.Configuration.Config.UI.ForeColor;
+			SubFontColor = Utility.Configuration.Config.UI.SubForeColor;
 
 
 			if ( ControlMember != null ) {

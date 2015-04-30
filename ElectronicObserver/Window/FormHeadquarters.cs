@@ -163,16 +163,22 @@ namespace ElectronicObserver.Window {
 			//Fleet
 			FlowPanelFleet.SuspendLayout();
 			ShipCount.Text = string.Format( "{0}/{1}", db.Ships.Count, db.Admiral.MaxShipCount );
-			if ( db.Ships.Count > db.Admiral.MaxShipCount - 5 )
+			if ( db.Ships.Count > db.Admiral.MaxShipCount - 5 ) {
 				ShipCount.BackColor = Color.LightCoral;
-			else
+				ShipCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+			} else {
 				ShipCount.BackColor = Color.Transparent;
+				ShipCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+			}
 
 			EquipmentCount.Text = string.Format( "{0}/{1}", db.Equipments.Count, db.Admiral.MaxEquipmentCount );
-			if ( db.Equipments.Count > db.Admiral.MaxEquipmentCount - 20 )
+			if ( db.Equipments.Count > db.Admiral.MaxEquipmentCount - 20 ) {
 				EquipmentCount.BackColor = Color.LightCoral;
-			else
+				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+			} else {
 				EquipmentCount.BackColor = Color.Transparent;
+				EquipmentCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+			}
 			FlowPanelFleet.ResumeLayout();
 
 			//UseItems
@@ -189,17 +195,23 @@ namespace ElectronicObserver.Window {
 			FlowPanelResource.SuspendLayout();
 			{
 				Color overcolor = Color.Moccasin;
+				Color fore = Utility.Configuration.Config.UI.ForeColor;
+				Color back = Utility.Configuration.Config.UI.BackColor;
 				Fuel.Text = db.Material.Fuel.ToString();
 				Fuel.BackColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+				Fuel.ForeColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? fore : back;
 
 				Ammo.Text = db.Material.Ammo.ToString();
 				Ammo.BackColor = db.Material.Ammo < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+				Ammo.ForeColor = db.Material.Ammo < db.Admiral.MaxResourceRegenerationAmount ? fore : back;
 
 				Steel.Text = db.Material.Steel.ToString();
 				Steel.BackColor = db.Material.Steel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+				Steel.ForeColor = db.Material.Steel < db.Admiral.MaxResourceRegenerationAmount ? fore : back;
 
 				Bauxite.Text = db.Material.Bauxite.ToString();
 				Bauxite.BackColor = db.Material.Bauxite < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+				Bauxite.ForeColor = db.Material.Bauxite < db.Admiral.MaxResourceRegenerationAmount ? fore : back;
 			}
 			FlowPanelResource.ResumeLayout();
 
@@ -219,11 +231,23 @@ namespace ElectronicObserver.Window {
 			if ( db.Ships.Count <= 0 ) return;
 
 			if ( db.Ships.Count >= db.Admiral.MaxShipCount ) {
-				ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightCoral : Color.Transparent;
+				if ( DateTime.Now.Second % 2 == 0 ) {
+					ShipCount.BackColor = Color.LightCoral;
+					ShipCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+				} else {
+					ShipCount.BackColor = Color.Transparent;
+					ShipCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+				}
 			}
 
 			if ( db.Equipments.Count >= db.Admiral.MaxEquipmentCount ) {
-				EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightCoral : Color.Transparent;
+				if ( DateTime.Now.Second % 2 == 0 ) {
+					EquipmentCount.BackColor = Color.LightCoral;
+					EquipmentCount.ForeColor = Utility.Configuration.Config.UI.BackColor;
+				} else {
+					EquipmentCount.BackColor = Color.Transparent;
+					EquipmentCount.ForeColor = Utility.Configuration.Config.UI.ForeColor;
+				}
 			}
 		}
 

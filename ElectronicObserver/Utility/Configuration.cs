@@ -145,12 +145,36 @@ namespace ElectronicObserver.Utility {
 				/// </summary>
 				public SerializableFont SubFont { get; set; }
 
+				#region - UI Colors -
+				public int ThemeID { get; set; }
+				public SerializableColor BackColor { get; set; }
+				public SerializableColor ForeColor { get; set; }
+				public SerializableColor SubForeColor { get; set; }
+				public SerializableColor HighlightForeColor { get; set; }
+				public SerializableColor HighlightColor { get; set; }
+				public SerializableColor ButtonBackColor { get; set; }
+				public SerializableColor FailedColor { get; set; }
+				public SerializableColor EliteColor { get; set; }
+				public SerializableColor FlagshipColor { get; set; }
+				public SerializableColor LateModelColor { get; set; }
+				#endregion
 
 				public ConfigUI() {
 					//*/
 					MainFont = new Font( "Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel );
 					SubFont = new Font( "Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel );
 					//*/
+					ThemeID = 0;
+					BackColor = new SerializableColor( Color.FromArgb( 255, 245, 245, 245 ) );
+					ForeColor = new SerializableColor( SystemColors.ControlText );
+					SubForeColor = new SerializableColor( Color.FromArgb( 0x88, 0x88, 0x88 ) );
+					HighlightColor = new SerializableColor( Color.FromArgb( 255, 0xFF, 0xFF, 0xCC ) );
+					HighlightForeColor = new SerializableColor( SystemColors.ControlText );
+					ButtonBackColor = new SerializableColor( SystemColors.Control );
+					FailedColor = new SerializableColor( Color.Red );
+					EliteColor = new SerializableColor( Color.FromArgb( 0xFF, 0x00, 0x00 ) );
+					FlagshipColor = new SerializableColor( Color.FromArgb( 0xFF, 0x88, 0x00 ) );
+					LateModelColor = new SerializableColor( Color.FromArgb( 0x00, 0x88, 0xFF ) );
 				}
 			}
 			/// <summary>UI</summary>

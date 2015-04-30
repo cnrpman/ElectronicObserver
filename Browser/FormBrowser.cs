@@ -143,6 +143,10 @@ namespace Browser {
 			ToolMenu.Dock = (DockStyle)Configuration.ToolMenuDockStyle;
 			ToolMenu.Visible = Configuration.IsToolMenuVisible;
 
+			ToolStripCustomizer.ToolStripRender.RendererTheme = (ToolStripCustomizer.ToolStripRenderTheme)Configuration.ThemeID;
+
+			ToolStripCustomizer.ToolStripRender.SetRender( this.ContextMenuTool );
+			ToolStripCustomizer.ToolStripRender.SetRender( this.ToolMenu );
 		}
 
 		private void ConfigurationUpdated() {

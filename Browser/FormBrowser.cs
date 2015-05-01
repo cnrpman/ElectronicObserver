@@ -528,7 +528,7 @@ namespace Browser {
 				mute = _volumeManager.IsMute;
 				isEnabled = true;
 
-			} catch ( Exception ) {
+			} catch ( Exception ex ) {
 				// 音量データ取得不能時
 				mute = false;
 				isEnabled = false;
@@ -698,7 +698,7 @@ namespace Browser {
 			ToolMenu_Other_ScreenShot_Click( sender, e );
 		}
 
-		private void ToolMenu_Mute_Click( object sender, EventArgs e ) {
+		private void ToolMenu_Mute_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e ) {
 			ToolMenu_Other_Mute_Click( sender, e );
 		}
 
@@ -783,6 +783,15 @@ namespace Browser {
 		private const uint WS_VISIBLE = 0x10000000;
 
 		#endregion
+
+		private void ToolMenu_Mute_DropDownOpening( object sender, EventArgs e ) {
+			trackVolume.Value = (int)( _volumeManager.Volume * 100 );
+			trackVolume.Visible = !trackVolume.Visible;
+		}
+
+		private void trackVolume_ValueChanged( object sender, EventArgs e ) {
+			_volumeManager.Volume = trackVolume.Value / 100f;
+		}
 
 
 

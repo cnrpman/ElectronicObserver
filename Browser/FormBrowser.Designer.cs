@@ -38,7 +38,8 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolMenu_Zoom = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.ToolMenu_Mute = new System.Windows.Forms.ToolStripButton();
+			this.ToolMenu_Mute = new System.Windows.Forms.ToolStripDropDownButton();
+			this.trackVolume = new System.Windows.Forms.TrackBar();
 			this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolMenu_Refresh = new System.Windows.Forms.ToolStripButton();
 			this.ToolMenu_NavigateToLogInPage = new System.Windows.Forms.ToolStripButton();
@@ -88,6 +89,7 @@
 			// 
 			// SizeAdjuster
 			// 
+			this.SizeAdjuster.Controls.Add(this.trackVolume);
 			this.SizeAdjuster.Controls.Add(this.Browser);
 			this.SizeAdjuster.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SizeAdjuster.Location = new System.Drawing.Point(0, 25);
@@ -96,6 +98,19 @@
 			this.SizeAdjuster.TabIndex = 0;
 			this.SizeAdjuster.SizeChanged += new System.EventHandler(this.SizeAdjuster_SizeChanged);
 			this.SizeAdjuster.Click += new System.EventHandler(this.SizeAdjuster_Click);
+			// 
+			// trackVolume
+			// 
+			this.trackVolume.Location = new System.Drawing.Point(75, 3);
+			this.trackVolume.Maximum = 100;
+			this.trackVolume.Name = "trackVolume";
+			this.trackVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
+			this.trackVolume.Size = new System.Drawing.Size(50, 104);
+			this.trackVolume.TabIndex = 2;
+			this.trackVolume.TickFrequency = 50;
+			this.trackVolume.Value = 100;
+			this.trackVolume.Visible = false;
+			this.trackVolume.ValueChanged += new System.EventHandler(this.trackVolume_ValueChanged);
 			// 
 			// Browser
 			// 
@@ -179,7 +194,8 @@
 			this.ToolMenu_Mute.Name = "ToolMenu_Mute";
 			this.ToolMenu_Mute.Size = new System.Drawing.Size(23, 22);
 			this.ToolMenu_Mute.Text = "静音";
-			this.ToolMenu_Mute.Click += new System.EventHandler(this.ToolMenu_Mute_Click);
+			this.ToolMenu_Mute.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(ToolMenu_Mute_DropDownItemClicked);
+			this.ToolMenu_Mute.DropDownOpening += new System.EventHandler(this.ToolMenu_Mute_DropDownOpening);
 			// 
 			// toolStripSeparator13
 			// 
@@ -567,7 +583,8 @@
 		private System.Windows.Forms.ToolStripMenuItem ToolMenu_Other_Zoom_250;
 		private System.Windows.Forms.ToolStripMenuItem ToolMenu_Other_Zoom_300;
 		private System.Windows.Forms.ToolStripMenuItem ToolMenu_Other_Zoom_400;
-		private System.Windows.Forms.ToolStripButton ToolMenu_Mute;
+		private System.Windows.Forms.TrackBar trackVolume;
+		private System.Windows.Forms.ToolStripDropDownButton ToolMenu_Mute;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
 		private System.Windows.Forms.ContextMenuStrip ContextMenuTool;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuTool_ShowToolMenu;

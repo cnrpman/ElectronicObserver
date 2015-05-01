@@ -64,6 +64,9 @@
     <Reference Include="CertMaker">
       <HintPath>..\packages\FiddlerCore.4.4.8.4\lib\net40\CertMaker.dll</HintPath>
     </Reference>
+    <Reference Include="CoreAudioApi">
+      <HintPath>..\assemblies\CoreAudioApi.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore4">
       <HintPath>..\packages\FiddlerCore.4.4.8.4\lib\net40\FiddlerCore4.dll</HintPath>
     </Reference>

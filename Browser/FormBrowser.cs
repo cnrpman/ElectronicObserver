@@ -538,7 +538,7 @@ namespace Browser {
 				Icons.Images[mute ? "Browser_Mute" : "Browser_Unmute"];
 
 
-			ToolMenu_Mute.Enabled = ToolMenu_Other_Mute.Enabled =
+			ToolMenu_Mute.Enabled = ToolMenu_Other_Mute.Enabled = ToolMenu_Mute_Track.Enabled =
 				isEnabled;
 		}
 
@@ -698,7 +698,7 @@ namespace Browser {
 			ToolMenu_Other_ScreenShot_Click( sender, e );
 		}
 
-		private void ToolMenu_Mute_DropDownItemClicked( object sender, ToolStripItemClickedEventArgs e ) {
+		private void ToolMenu_Mute_Click( object sender, EventArgs e ) {
 			ToolMenu_Other_Mute_Click( sender, e );
 		}
 
@@ -793,7 +793,9 @@ namespace Browser {
 			_volumeManager.Volume = trackVolume.Value / 100f;
 		}
 
-
+		private void trackVolume_LostFocus( object sender, EventArgs e ) {
+			trackVolume.Visible = false;
+		}
 
 	}
 

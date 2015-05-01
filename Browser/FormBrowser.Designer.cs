@@ -38,7 +38,8 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolMenu_Zoom = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.ToolMenu_Mute = new System.Windows.Forms.ToolStripDropDownButton();
+			this.ToolMenu_Mute = new System.Windows.Forms.ToolStripButton();
+			this.ToolMenu_Mute_Track = new System.Windows.Forms.ToolStripDropDownButton();
 			this.trackVolume = new System.Windows.Forms.TrackBar();
 			this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolMenu_Refresh = new System.Windows.Forms.ToolStripButton();
@@ -111,6 +112,7 @@
 			this.trackVolume.Value = 100;
 			this.trackVolume.Visible = false;
 			this.trackVolume.ValueChanged += new System.EventHandler(this.trackVolume_ValueChanged);
+			this.trackVolume.LostFocus += new System.EventHandler(this.trackVolume_LostFocus);
 			// 
 			// Browser
 			// 
@@ -149,6 +151,7 @@
             this.ToolMenu_Zoom,
             this.toolStripSeparator2,
             this.ToolMenu_Mute,
+			this.ToolMenu_Mute_Track,
             this.toolStripSeparator13,
             this.ToolMenu_Refresh,
             this.ToolMenu_NavigateToLogInPage,
@@ -194,8 +197,16 @@
 			this.ToolMenu_Mute.Name = "ToolMenu_Mute";
 			this.ToolMenu_Mute.Size = new System.Drawing.Size(23, 22);
 			this.ToolMenu_Mute.Text = "静音";
-			this.ToolMenu_Mute.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(ToolMenu_Mute_DropDownItemClicked);
-			this.ToolMenu_Mute.DropDownOpening += new System.EventHandler(this.ToolMenu_Mute_DropDownOpening);
+			this.ToolMenu_Mute.Click += new System.EventHandler(ToolMenu_Mute_Click);
+			// 
+			// ToolMenu_Mute_Track
+			// 
+			this.ToolMenu_Mute_Track.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+			this.ToolMenu_Mute_Track.Enabled = false;
+			this.ToolMenu_Mute_Track.Name = "ToolMenu_Mute_Track";
+			this.ToolMenu_Mute_Track.Size = new System.Drawing.Size(23, 22);
+			this.ToolMenu_Mute_Track.Text = "音量调节";
+			this.ToolMenu_Mute_Track.DropDownOpening += new System.EventHandler(this.ToolMenu_Mute_DropDownOpening);
 			// 
 			// toolStripSeparator13
 			// 
@@ -584,7 +595,8 @@
 		private System.Windows.Forms.ToolStripMenuItem ToolMenu_Other_Zoom_300;
 		private System.Windows.Forms.ToolStripMenuItem ToolMenu_Other_Zoom_400;
 		private System.Windows.Forms.TrackBar trackVolume;
-		private System.Windows.Forms.ToolStripDropDownButton ToolMenu_Mute;
+		private System.Windows.Forms.ToolStripDropDownButton ToolMenu_Mute_Track;
+		private System.Windows.Forms.ToolStripButton ToolMenu_Mute;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
 		private System.Windows.Forms.ContextMenuStrip ContextMenuTool;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuTool_ShowToolMenu;

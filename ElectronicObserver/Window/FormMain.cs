@@ -166,8 +166,13 @@ namespace ElectronicObserver.Window {
 
 			// color theme
 			foreach ( var f in SubForms ) {
-				f.BackColor = this.BackColor;
-				f.ForeColor = this.ForeColor;
+				if ( f is FormShipGroup ) {
+					f.BackColor = SystemColors.Control;
+					f.ForeColor = SystemColors.ControlText;
+				} else {
+					f.BackColor = this.BackColor;
+					f.ForeColor = this.ForeColor;
+				}
 			}
 		}
 

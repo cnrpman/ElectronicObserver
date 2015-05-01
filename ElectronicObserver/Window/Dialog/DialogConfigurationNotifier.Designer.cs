@@ -72,6 +72,8 @@
 			this.DialogOpenSound = new System.Windows.Forms.OpenFileDialog();
 			this.DialogOpenImage = new System.Windows.Forms.OpenFileDialog();
 			this.ToolTipText = new System.Windows.Forms.ToolTip(this.components);
+			this.CloseList = new System.Windows.Forms.CheckedListBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.GroupSound.SuspendLayout();
 			this.GroupImage.SuspendLayout();
 			this.GroupDialog.SuspendLayout();
@@ -86,7 +88,7 @@
 			// ButtonCancel
 			// 
 			this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.ButtonCancel.Location = new System.Drawing.Point(463, 377);
+			this.ButtonCancel.Location = new System.Drawing.Point(537, 407);
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 7;
@@ -97,7 +99,7 @@
 			// ButtonOK
 			// 
 			this.ButtonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.ButtonOK.Location = new System.Drawing.Point(382, 377);
+			this.ButtonOK.Location = new System.Drawing.Point(456, 407);
 			this.ButtonOK.Name = "ButtonOK";
 			this.ButtonOK.Size = new System.Drawing.Size(75, 23);
 			this.ButtonOK.TabIndex = 6;
@@ -112,7 +114,7 @@
 			this.GroupSound.Controls.Add(this.SoundPath);
 			this.GroupSound.Location = new System.Drawing.Point(12, 37);
 			this.GroupSound.Name = "GroupSound";
-			this.GroupSound.Size = new System.Drawing.Size(260, 78);
+			this.GroupSound.Size = new System.Drawing.Size(298, 78);
 			this.GroupSound.TabIndex = 1;
 			this.GroupSound.TabStop = false;
 			this.GroupSound.Text = "通知声音";
@@ -132,7 +134,7 @@
 			// SoundPathSearch
 			// 
 			this.SoundPathSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.SoundPathSearch.Location = new System.Drawing.Point(222, 47);
+			this.SoundPathSearch.Location = new System.Drawing.Point(260, 47);
 			this.SoundPathSearch.Name = "SoundPathSearch";
 			this.SoundPathSearch.Size = new System.Drawing.Size(32, 23);
 			this.SoundPathSearch.TabIndex = 2;
@@ -147,14 +149,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.SoundPath.Location = new System.Drawing.Point(6, 47);
 			this.SoundPath.Name = "SoundPath";
-			this.SoundPath.Size = new System.Drawing.Size(210, 23);
+			this.SoundPath.Size = new System.Drawing.Size(248, 23);
 			this.SoundPath.TabIndex = 1;
 			this.SoundPath.TextChanged += new System.EventHandler(this.SoundPath_TextChanged);
 			// 
 			// ButtonTest
 			// 
 			this.ButtonTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.ButtonTest.Location = new System.Drawing.Point(12, 377);
+			this.ButtonTest.Location = new System.Drawing.Point(12, 407);
 			this.ButtonTest.Name = "ButtonTest";
 			this.ButtonTest.Size = new System.Drawing.Size(75, 23);
 			this.ButtonTest.TabIndex = 5;
@@ -178,9 +180,9 @@
 			this.GroupImage.Controls.Add(this.DrawsImage);
 			this.GroupImage.Controls.Add(this.ImagePathSearch);
 			this.GroupImage.Controls.Add(this.ImagePath);
-			this.GroupImage.Location = new System.Drawing.Point(278, 37);
+			this.GroupImage.Location = new System.Drawing.Point(316, 37);
 			this.GroupImage.Name = "GroupImage";
-			this.GroupImage.Size = new System.Drawing.Size(260, 78);
+			this.GroupImage.Size = new System.Drawing.Size(298, 78);
 			this.GroupImage.TabIndex = 2;
 			this.GroupImage.TabStop = false;
 			this.GroupImage.Text = "通知背景";
@@ -200,7 +202,7 @@
 			// ImagePathSearch
 			// 
 			this.ImagePathSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.ImagePathSearch.Location = new System.Drawing.Point(222, 47);
+			this.ImagePathSearch.Location = new System.Drawing.Point(260, 47);
 			this.ImagePathSearch.Name = "ImagePathSearch";
 			this.ImagePathSearch.Size = new System.Drawing.Size(32, 23);
 			this.ImagePathSearch.TabIndex = 2;
@@ -215,12 +217,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ImagePath.Location = new System.Drawing.Point(6, 47);
 			this.ImagePath.Name = "ImagePath";
-			this.ImagePath.Size = new System.Drawing.Size(210, 23);
+			this.ImagePath.Size = new System.Drawing.Size(248, 23);
 			this.ImagePath.TabIndex = 1;
 			this.ImagePath.TextChanged += new System.EventHandler(this.ImagePath_TextChanged);
 			// 
 			// GroupDialog
 			// 
+			this.GroupDialog.Controls.Add(this.label5);
+			this.GroupDialog.Controls.Add(this.CloseList);
 			this.GroupDialog.Controls.Add(this.ShowWithActivation);
 			this.GroupDialog.Controls.Add(this.label4);
 			this.GroupDialog.Controls.Add(this.DrawsMessage);
@@ -244,7 +248,7 @@
 			this.GroupDialog.Controls.Add(this.ShowsDialog);
 			this.GroupDialog.Location = new System.Drawing.Point(12, 121);
 			this.GroupDialog.Name = "GroupDialog";
-			this.GroupDialog.Size = new System.Drawing.Size(526, 141);
+			this.GroupDialog.Size = new System.Drawing.Size(602, 171);
 			this.GroupDialog.TabIndex = 3;
 			this.GroupDialog.TabStop = false;
 			this.GroupDialog.Text = "通知对话框";
@@ -252,7 +256,7 @@
 			// ShowWithActivation
 			// 
 			this.ShowWithActivation.AutoSize = true;
-			this.ShowWithActivation.Location = new System.Drawing.Point(90, 22);
+			this.ShowWithActivation.Location = new System.Drawing.Point(6, 137);
 			this.ShowWithActivation.Name = "ShowWithActivation";
 			this.ShowWithActivation.Size = new System.Drawing.Size(151, 19);
 			this.ShowWithActivation.TabIndex = 1;
@@ -326,7 +330,7 @@
 			// BackColorPreview
 			// 
 			this.BackColorPreview.AutoSize = true;
-			this.BackColorPreview.Location = new System.Drawing.Point(397, 109);
+			this.BackColorPreview.Location = new System.Drawing.Point(269, 138);
 			this.BackColorPreview.Name = "BackColorPreview";
 			this.BackColorPreview.Size = new System.Drawing.Size(67, 15);
 			this.BackColorPreview.TabIndex = 18;
@@ -337,7 +341,7 @@
 			// BackColorSelect
 			// 
 			this.BackColorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BackColorSelect.Location = new System.Drawing.Point(470, 105);
+			this.BackColorSelect.Location = new System.Drawing.Point(342, 134);
 			this.BackColorSelect.Name = "BackColorSelect";
 			this.BackColorSelect.Size = new System.Drawing.Size(32, 23);
 			this.BackColorSelect.TabIndex = 19;
@@ -523,9 +527,9 @@
 			this.GroupDamage.Controls.Add(this.NotifiesAfter);
 			this.GroupDamage.Controls.Add(this.NotifiesNow);
 			this.GroupDamage.Controls.Add(this.NotifiesBefore);
-			this.GroupDamage.Location = new System.Drawing.Point(12, 268);
+			this.GroupDamage.Location = new System.Drawing.Point(12, 298);
 			this.GroupDamage.Name = "GroupDamage";
-			this.GroupDamage.Size = new System.Drawing.Size(526, 103);
+			this.GroupDamage.Size = new System.Drawing.Size(602, 103);
 			this.GroupDamage.TabIndex = 4;
 			this.GroupDamage.TabStop = false;
 			this.GroupDamage.Text = "大破警告";
@@ -659,10 +663,37 @@
 			this.ToolTipText.InitialDelay = 500;
 			this.ToolTipText.ReshowDelay = 100;
 			// 
+			// CloseList
+			// 
+			this.CloseList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.CloseList.CheckOnClick = true;
+			this.CloseList.FormattingEnabled = true;
+			this.CloseList.Items.AddRange(new object[] {
+            "左键单击",
+            "左键双击",
+            "右键单击",
+            "右键双击",
+            "中键单击",
+            "中键双击",
+            "鼠标移过"});
+			this.CloseList.Location = new System.Drawing.Point(476, 35);
+			this.CloseList.Name = "CloseList";
+			this.CloseList.Size = new System.Drawing.Size(120, 130);
+			this.CloseList.TabIndex = 20;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(473, 18);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(49, 15);
+			this.label5.TabIndex = 21;
+			this.label5.Text = "关闭：";
+			// 
 			// DialogConfigurationNotifier
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(550, 412);
+			this.ClientSize = new System.Drawing.Size(624, 442);
 			this.Controls.Add(this.GroupDamage);
 			this.Controls.Add(this.GroupDialog);
 			this.Controls.Add(this.GroupImage);
@@ -747,5 +778,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.ToolTip ToolTipText;
 		private System.Windows.Forms.CheckBox ShowWithActivation;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.CheckedListBox CloseList;
 	}
 }

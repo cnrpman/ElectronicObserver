@@ -296,7 +296,7 @@ namespace ElectronicObserver.Window {
 				case "api_req_combined_battle/midnight_battle": {
 						int[] hp = bm.BattleNight.EmulateBattle();
 
-						SetNightBattleEvent( bm.BattleNight.InitialHP.Skip( 1 ).ToArray(), true, bm.BattleNight );
+						SetNightBattleEvent( bm.BattleNight.InitialHP.Skip( 1 ).Concat( ( (BattleDataCombined)bm.BattleNight ).InitialHPCombined.Skip( 1 ) ).ToArray(), true, bm.BattleNight );
 						SetHPCombined( hp, bm.BattleNight );
 						SetDamageRateCombined( hp, bm.BattleDay );
 
@@ -309,7 +309,7 @@ namespace ElectronicObserver.Window {
 						SetFormation( bm.BattleNight );
 						ClearAerialWarfare();
 						ClearSearchingResult();
-						SetNightBattleEvent( bm.BattleNight.InitialHP.Skip( 1 ).ToArray(), true, bm.BattleNight );
+						SetNightBattleEvent( bm.BattleNight.InitialHP.Skip( 1 ).Concat( ( (BattleDataCombined)bm.BattleNight ).InitialHPCombined.Skip( 1 ) ).ToArray(), true, bm.BattleNight );
 						SetHPCombined( hp, bm.BattleNight );
 						SetDamageRateCombined( hp, bm.BattleNight );
 

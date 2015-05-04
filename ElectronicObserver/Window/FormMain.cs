@@ -82,7 +82,7 @@ namespace ElectronicObserver.Window {
 			Utility.Logger.Add( 2, SoftwareInformation.SoftwareNameJapanese + " を起動しています…" );
 
 
-			this.Text = SoftwareInformation.VersionJapanese + " - [魔改]";
+			this.Text = SoftwareInformation.VersionJapanese + "（迷彩型）";
 
 			ResourceManager.Instance.Load();
 			RecordManager.Instance.Load();

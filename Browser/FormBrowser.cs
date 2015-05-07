@@ -210,11 +210,31 @@ namespace Browser {
 		}
 
 		private void Browser_DocumentCompleted( object sender, WebBrowserDocumentCompletedEventArgs e ) {
+			ReplaceEmbedHtml();
 
 			StyleSheetApplied = false;
 			ApplyStyleSheet();
 
 			ApplyZoom();
+		}
+
+		/// <summary>
+		/// 应用embed元素
+		/// </summary>
+		private void ReplaceEmbedHtml() {
+			if ( string.IsNullOrEmpty( Configuration.EmbedHtml ) )
+				return;
+
+			try {
+				var document = Browser.Document;
+				string url;
+				if ( document != null && ( url = document.Url.ToString() ).Contains( ".swf?" ) ) {
+					document.Body.InnerHtml = string.Format( Configuration.EmbedHtml, url );
+				}
+			} catch ( Exception ex ) {
+				BrowserHost.AsyncRemoteRun( () =>
+					BrowserHost.Proxy.SendErrorReport( ex.ToString(), "embed元素应用失败。" ) );
+			}
 		}
 
 		/// <summary>
@@ -418,7 +438,10 @@ namespace Browser {
 
 					var swf = getFrameElementById( wb.Document, "externalswf" );
 					if ( swf == null ) {
-						throw new InvalidOperationException( "対象の swf が見つかりませんでした。" );
+						viewobj = wb.Document.GetElementsByTagName( "embed" )[0].DomElement as IViewObject;
+						if ( viewobj == null ) {
+							throw new InvalidOperationException( "swf 对象未发现，并且获取 embed 元素失败。" );
+						}
 					}
 
 					Func<dynamic, bool> isvalid = target => {
@@ -431,8 +454,12 @@ namespace Browser {
 						return true;
 					};
 
-					if ( !isvalid( swf.DomElement as HTMLEmbed ) && !isvalid( swf.DomElement as HTMLObjectElement ) ) {
-						throw new InvalidOperationException( "対象の swf が見つかりませんでした。" );
+					if ( viewobj == null && !isvalid( swf.DomElement as HTMLEmbed ) && !isvalid( swf.DomElement as HTMLObjectElement ) ) {
+						string name = null;
+						if ( swf.DomElement != null ) {
+							name = swf.DomElement.GetType().FullName;
+						}
+						throw new InvalidOperationException( string.Format( "swf对象无效，该对象为：{0}.", name ) );
 					}
 				}
 

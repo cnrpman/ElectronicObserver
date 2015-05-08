@@ -1,4 +1,6 @@
-﻿namespace Browser
+﻿#define VOLUME
+
+namespace Browser
 {
     partial class FormBrowser
     {
@@ -150,9 +152,11 @@
             this.toolStripSeparator1,
             this.ToolMenu_Zoom,
             this.toolStripSeparator2,
+#if VOLUME
             this.ToolMenu_Mute,
 			this.ToolMenu_Mute_Track,
             this.toolStripSeparator13,
+#endif
             this.ToolMenu_Refresh,
             this.ToolMenu_NavigateToLogInPage,
             this.toolStripSeparator8,

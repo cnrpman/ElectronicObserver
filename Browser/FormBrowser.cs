@@ -1,4 +1,6 @@
-﻿using BrowserLib;
+﻿#define VOLUME
+
+using BrowserLib;
 using mshtml;
 using System;
 using System.Collections.Generic;
@@ -70,7 +72,9 @@ namespace Browser {
 		/// </summary>
 		private bool IsKanColleLoaded { get; set; }
 
+#if VOLUME
 		private VolumeManager _volumeManager;
+#endif
 
 
 
@@ -82,7 +86,9 @@ namespace Browser {
 
 			ServerUri = serverUri;
 			StyleSheetApplied = false;
+#if VOLUME
 			_volumeManager = new VolumeManager( (uint)System.Diagnostics.Process.GetCurrentProcess().Id );
+#endif
 			Browser.ReplacedKeyDown += Browser_ReplacedKeyDown;
 		}
 
@@ -552,8 +558,13 @@ namespace Browser {
 			bool isEnabled;
 
 			try {
+#if VOLUME
 				mute = _volumeManager.IsMute;
 				isEnabled = true;
+#else
+				mute = false;
+				isEnabled = false;
+#endif
 
 			} catch ( Exception ex ) {
 				// 音量データ取得不能時
@@ -640,11 +651,13 @@ namespace Browser {
 
 
 		private void ToolMenu_Other_Mute_Click( object sender, EventArgs e ) {
+#if VOLUME
 			try {
 				_volumeManager.ToggleMute();
 
 			} catch ( Exception ) {
 			}
+#endif
 
 			SetMuteIcon();
 		}
@@ -812,16 +825,22 @@ namespace Browser {
 		#endregion
 
 		private void ToolMenu_Mute_DropDownOpening( object sender, EventArgs e ) {
+#if VOLUME
 			trackVolume.Value = (int)( _volumeManager.Volume * 100 );
 			trackVolume.Visible = !trackVolume.Visible;
+#endif
 		}
 
 		private void trackVolume_ValueChanged( object sender, EventArgs e ) {
+#if VOLUME
 			_volumeManager.Volume = trackVolume.Value / 100f;
+#endif
 		}
 
 		private void trackVolume_LostFocus( object sender, EventArgs e ) {
+#if VOLUME
 			trackVolume.Visible = false;
+#endif
 		}
 
 	}

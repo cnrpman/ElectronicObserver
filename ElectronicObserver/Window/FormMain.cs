@@ -660,6 +660,10 @@ namespace ElectronicObserver.Window {
 
 		}
 
+        private void StripMenu_Tool_ResourcesGraph_Click(object sender, EventArgs e)
+        {
+            new DialogResourcesGraph().Show( this );
+        }
 
 		private async void StripMenu_Debug_DeleteOldAPI_Click( object sender, EventArgs e ) {
 

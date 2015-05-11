@@ -92,6 +92,7 @@
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.StripMenu_Tool_AlbumMasterShip = new System.Windows.Forms.ToolStripMenuItem();
 			this.StripMenu_Tool_AlbumMasterEquipment = new System.Windows.Forms.ToolStripMenuItem();
+            this.StripMenu_Tool_ResourcesGraph = new System.Windows.Forms.ToolStripMenuItem();
 			this.StripMenu_Debug = new System.Windows.Forms.ToolStripMenuItem();
 			this.StripMenu_Debug_LoadAPIFromFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.StripMenu_Debug_LoadInitialAPI = new System.Windows.Forms.ToolStripMenuItem();
@@ -613,7 +614,8 @@
             this.StripMenu_Tool_EquipmentList,
             this.toolStripSeparator7,
             this.StripMenu_Tool_AlbumMasterShip,
-            this.StripMenu_Tool_AlbumMasterEquipment});
+            this.StripMenu_Tool_AlbumMasterEquipment,
+            this.StripMenu_Tool_ResourcesGraph});
 			this.StripMenu_Tool.Name = "StripMenu_Tool";
 			this.StripMenu_Tool.Size = new System.Drawing.Size(74, 22);
 			this.StripMenu_Tool.Text = "工具(&T)";
@@ -643,6 +645,13 @@
 			this.StripMenu_Tool_AlbumMasterEquipment.Size = new System.Drawing.Size(143, 22);
 			this.StripMenu_Tool_AlbumMasterEquipment.Text = "装备图鉴(&E)";
 			this.StripMenu_Tool_AlbumMasterEquipment.Click += new System.EventHandler(this.StripMenu_Tool_AlbumMasterEquipment_Click);
+            // 
+            // StripMenu_Tool_ResourcesGraph
+            // 
+            this.StripMenu_Tool_ResourcesGraph.Name = "StripMenu_Tool_ResourcesGraph";
+            this.StripMenu_Tool_ResourcesGraph.Size = new System.Drawing.Size(143, 22);
+            this.StripMenu_Tool_ResourcesGraph.Text = "资源图表";
+            this.StripMenu_Tool_ResourcesGraph.Click += new System.EventHandler(this.StripMenu_Tool_ResourcesGraph_Click);
 			// 
 			// StripMenu_Debug
 			// 
@@ -851,6 +860,7 @@
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_AlbumMasterShip;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_View_FleetOverview;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_AlbumMasterEquipment;
+        private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_ResourcesGraph;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_Debug_LoadRecordFromOld;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_View_ShipGroup;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_Debug_DeleteOldAPI;

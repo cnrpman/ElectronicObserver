@@ -70,6 +70,7 @@ namespace ElectronicObserver.Resource {
 			FormAlbumEquipment,
 			FormConfiguration,
 			FormEquipmentList,
+            FormResourcesGraph,
 			FormWindowCapture,
 			FleetNoShip,
 			FleetDocking,
@@ -244,6 +245,7 @@ namespace ElectronicObserver.Resource {
 					LoadImageFromArchive( Icons, archive, mstpath + @"Form/AlbumEquipment.png", "Form_AlbumEquipment" );
 					LoadImageFromArchive( Icons, archive, mstpath + @"Form/Configuration.png", "Form_Configuration" );
 					LoadImageFromArchive( Icons, archive, mstpath + @"Form/EquipmentList.png", "Form_EquipmentList" );
+                    LoadImageFromArchive( Icons, archive, mstpath + @"Form/ResourcesGraph.png", "Form_ResourcesGraph");
 					LoadImageFromArchive( Icons, archive, mstpath + @"Form/WindowCapture.png", "Form_WindowCapture" );
 
 					LoadImageFromArchive( Icons, archive, mstpath + @"Fleet/NoShip.png", "Fleet_NoShip" );

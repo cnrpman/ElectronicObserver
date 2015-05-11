@@ -326,6 +326,10 @@ namespace ElectronicObserver.Window {
 				#endregion
 			}
 
+			private double CalculateFire( ShipData ship ) {
+				return ( ship.FirepowerTotal + ship.TorpedoTotal ) * 1.5 + ship.BombTotal * 2 + 50;
+			}
+
 			public void Update( int shipMasterID ) {
 
 				KCDatabase db = KCDatabase.Instance;
@@ -342,7 +346,12 @@ namespace ElectronicObserver.Window {
 						string.Format(
 							"{0} {1}\n火力: {2}/{3}\n雷装: {4}/{5}\n対空: {6}/{7}\n装甲: {8}/{9}\n対潜: {10}/{11}\n回避: {12}/{13}\n索敵: {14}/{15}\n運: {16}\n射程: {17}\n(右クリックで図鑑)\n",
 							ship.MasterShip.ShipTypeName, ship.NameWithLevel,
-							ship.FirepowerBase, ship.FirepowerTotal,
+							ship.FirepowerBase,
+							(ship.MasterShip.ShipType == 7 ||	// 轻空母
+							ship.MasterShip.ShipType == 11 ||	// 正规空母
+							ship.MasterShip.ShipType == 18) ?	// 装甲空母
+							string.Format( "{0}（空母火力：{1:F0}）", ship.FirepowerTotal, CalculateFire( ship ) ) :
+							ship.FirepowerTotal.ToString(),
 							ship.TorpedoBase, ship.TorpedoTotal,
 							ship.AABase, ship.AATotal,
 							ship.ArmorBase, ship.ArmorTotal,

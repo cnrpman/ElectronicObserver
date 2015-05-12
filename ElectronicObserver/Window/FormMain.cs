@@ -662,7 +662,14 @@ namespace ElectronicObserver.Window {
 
         private void StripMenu_Tool_ResourcesGraph_Click(object sender, EventArgs e)
         {
-            new DialogResourcesGraph().Show( this );
+            try
+            {
+                new DialogResourcesGraph().Show(this);
+            }
+            catch (System.ObjectDisposedException)
+            {
+                //catch and do nothing. window was disposed by inner logic.
+            }
         }
 
 		private async void StripMenu_Debug_DeleteOldAPI_Click( object sender, EventArgs e ) {
